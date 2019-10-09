@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update repos and upgrade all packages
+      apt:
+        update_cache: yes
+        upgrade: safe
+    - name: Remove useless apt packages and dependencies
+      apt:
+        autoremove: yes
+        autoclean: yes
+        
