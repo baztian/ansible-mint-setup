@@ -24,3 +24,4 @@
         autoclean: yes
   roles:
     - role: baztian.git
+    - role: baztian.vc
