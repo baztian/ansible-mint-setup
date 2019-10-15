@@ -1,7 +1,19 @@
 ---
 - hosts: all
   become: yes
+  vars:
+    official_apt_sources_replacements:
+      - regexp: http://packages.linuxmint.com
+        replace: http://ftp.fau.de/mint/packages
+      - regexp: http://archive.ubuntu.com/ubuntu
+        replace: http://ftp.fau.de/ubuntu
   tasks:
+    - name: Setup german mirrors
+      replace:
+        path: /etc/apt/sources.list.d/official-package-repositories.list
+        regexp: "{{ item.regexp }}"
+        replace: "{{ item.replace }}"
+      with_items: "{{ official_apt_sources_replacements }}"
     - name: Update repos and upgrade all packages
       apt:
         update_cache: yes
