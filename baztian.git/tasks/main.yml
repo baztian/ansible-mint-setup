@@ -1,0 +1,7 @@
+---
+- name: Install git and associated packages
+  apt:
+    pkg:
+      - git
+      - git-doc
+      - gitk

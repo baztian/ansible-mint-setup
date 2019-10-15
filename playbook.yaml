@@ -10,4 +10,5 @@
       apt:
         autoremove: yes
         autoclean: yes
-        
+  roles:
+    - role: baztian.git
