@@ -1,0 +1,50 @@
+---
+- name: Add Apt signing key on remote server to keyring
+  apt_key:
+    data: "{{ lookup('file', 'microsoft.asc') }}"
+    state: present
+- name: Update repos all packages
+  apt:
+    update_cache: yes
+- apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    state: present
+- name: Install visual studio code package
+  apt:
+    pkg:
+      - code
+- name: Install code-settings-sync extension
+  command: code --install-extension shan.code-settings-sync
+  become: no
+- name: Check if settings.json exists
+  stat:
+    path: "{{ user_settings_file }}"
+  register: user_settings
+  become: no
+- debug: msg="{{ user_settings.stat.exists }}"
+- name: Slurp user settings.json
+  slurp:
+    src: "{{ user_settings.stat.path }}"
+  register: user_settings_json
+  when: user_settings.stat.exists
+- name: Convert user settings.json to ansible var
+  set_fact:
+    settings: "{{ user_settings_json['content'] | b64decode }}"
+  when: user_settings.stat.exists
+- name: Ensure empty config with sync.gist set up
+  set_fact:
+    updated_settings:
+      sync.gist: "{{ sync_gist }}"
+  when: not user_settings.stat.exists
+- name: Ensure existing sync.gist is set up
+  set_fact:
+    updated_settings: "{{ settings | combine({'sync.gist': sync_gist }) }}"
+  when: user_settings.stat.exists and settings['sync.gist'] is not defined
+- debug: msg="{{ updated_settings }}"
+  when: updated_settings is defined
+- name: Write updated settings.json
+  copy:
+     content: "{{ updated_settings }}"
+     dest: "{{ user_settings_file }}"
+  become: no
+  when: updated_settings is defined
