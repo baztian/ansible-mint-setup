@@ -1,6 +1,6 @@
 galaxy_info:
   author: baztian
-  description: Role for installing git and associated tools
+  description: Role for installing visual studio code
   license: GPLv3
   min_ansible_version: 2.0
   platforms:
@@ -8,5 +8,6 @@ galaxy_info:
     versions:
     - xenial
   galaxy_tags:
-    - git
+    - visualstudio
+    - vc
 dependencies: []
