@@ -1,1 +1,26 @@
 ---
+git_config:
+  color.ui: "auto"
+  core.fileMode: "false"
+  push.default: "simple"
+  pull.rebase: "true" # set up pull to rebase instead of merge
+  pull.ff: "only" # Disallows non ff merges on pull. Overrides merge.ff when pulling
+  merge.ff: "false" # even create extra merge commit when fast forward merge would be possible
+  alias.st: "status -sb"
+  alias.tree: "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %Cblue<%an>%Creset' --abbrev-commit --date=local --all"
+  alias.last: "log -1 --stat"
+  diff.guitool: "meld"
+  difftool.kdiff3.cmd: 'kdiff3 "$LOCAL" "$REMOTE"'
+  difftool.kdiff3.trustExitCode: "false"
+  difftool.p4mergetool.cmd: 'p4merge "$LOCAL" "$REMOTE"'
+  difftool.meld.cmd: 'meld "$LOCAL" "$REMOTE"'
+  merge.tool: "meld"
+  mergetool.p4mergetool.cmd: 'p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'
+  mergetool.p4mergetool.trustExitCode: "false"
+  #https://stackoverflow.com/a/34119867/1960601
+  mergetool.meld.cmd: 'meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"'
+  #mergetool.meld.cmd: 'meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"'
+  mergetool.keepBackup: "false"
+  mergetool.keeptemporaries: "false"
+  mergetool.keepbackups: "false"
+  mergetool.prompt: "false"
