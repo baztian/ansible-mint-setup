@@ -5,3 +5,12 @@
       - git
       - git-doc
       - gitk
+      - meld
+- name: Set up git configuration
+  git_config:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    scope: global
+  with_dict:
+    "{{ git_config }}"
+  become: no
