@@ -18,6 +18,7 @@
   git:
     repo: https://github.com/magicmonty/bash-git-prompt.git
     dest: /opt/bash-git-prompt
+    depth: 1
     version: "{{ bash_git_prompt_version }}"
 - name: Add bash-git-prompt config to .bashrc
   blockinfile:
