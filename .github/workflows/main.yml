@@ -11,3 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Run ansible-lint
       uses: ansible/ansible-lint-action@master
+    - name: Prepare ssh
+      run: ssh-copy-id localhost
+    - name: Execute ansible playbook
+      run: ansible-playbook playbook.yml -i localhost
