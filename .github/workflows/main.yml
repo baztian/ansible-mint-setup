@@ -12,6 +12,8 @@ jobs:
     - name: Run ansible-lint
       uses: ansible/ansible-lint-action@master
     - name: Prepare ssh
-      run: ssh-copy-id localhost
+      run: |
+        ssh-keygen -N "" -f ~/.ssh/id_rsa
+        ssh-copy-id localhost
     - name: Execute ansible playbook
       run: ansible-playbook playbook.yml -i localhost
