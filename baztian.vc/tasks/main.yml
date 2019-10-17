@@ -13,15 +13,23 @@
   apt:
     pkg:
       - code
+- name: Check whether code-settings-sync extension installed
+  find:
+    paths: "~/.vscode/extensions"
+    patterns: "shan.code-settings-sync*"
+    file_type: directory
+    recurse: no
+  register: settings_sync_ext_find
+  become: no
 - name: Install code-settings-sync extension
   command: code --install-extension shan.code-settings-sync
   become: no
+  when: not settings_sync_ext_find.matched
 - name: Check if settings.json exists
   stat:
     path: "{{ user_settings_file }}"
   register: user_settings
   become: no
-- debug: msg="{{ user_settings.stat.exists }}"
 - name: Slurp user settings.json
   slurp:
     src: "{{ user_settings.stat.path }}"
@@ -40,8 +48,6 @@
   set_fact:
     updated_settings: "{{ settings | combine({'sync.gist': sync_gist }) }}"
   when: user_settings.stat.exists and settings['sync.gist'] is not defined
-- debug: msg="{{ updated_settings }}"
-  when: updated_settings is defined
 - name: Write updated settings.json
   copy:
      content: "{{ updated_settings }}"
