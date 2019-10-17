@@ -14,4 +14,4 @@ jobs:
     - name: Execute ansible playbook
       run: |
         ansible-playbook playbook.yml -i local \
-          --extra-vars "official_apt_sources_replacements=[]"
+          --skip-tags apt_upgrade
