@@ -24,3 +24,4 @@ git_config:
   mergetool.keeptemporaries: "false"
   mergetool.keepbackups: "false"
   mergetool.prompt: "false"
+bash_git_prompt_version: 9733b12b3441424ad47d4f42977578e8c9d89438
