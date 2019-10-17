@@ -1,12 +1,6 @@
 ---
 - hosts: all
   become: yes
-  vars:
-    official_apt_sources_replacements:
-      - regexp: http://packages.linuxmint.com
-        replace: http://ftp.fau.de/mint/packages
-      - regexp: http://archive.ubuntu.com/ubuntu
-        replace: http://ftp.fau.de/ubuntu
   tasks:
     - name: Setup german mirrors
       replace:
@@ -23,6 +17,9 @@
         autoremove: yes
         autoclean: yes
   roles:
+    - role: baztian.apt_upgrade
+      tags: apt_upgrade
     - role: baztian.git
+      tags: git
     - role: baztian.vc
       tags: vc

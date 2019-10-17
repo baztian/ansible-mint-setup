@@ -1,0 +1,15 @@
+---
+- name: Setup german mirrors
+  replace:
+    path: /etc/apt/sources.list.d/official-package-repositories.list
+    regexp: "{{ item.regexp }}"
+    replace: "{{ item.replace }}"
+  with_items: "{{ official_apt_sources_replacements }}"
+- name: Update repos and upgrade all packages
+  apt:
+    update_cache: yes
+    upgrade: safe
+- name: Remove useless apt packages and dependencies
+  apt:
+    autoremove: yes
+    autoclean: yes
