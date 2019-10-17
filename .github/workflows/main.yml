@@ -12,4 +12,6 @@ jobs:
     - name: Run ansible-lint
       uses: ansible/ansible-lint-action@master
     - name: Execute ansible playbook
-      run: ansible-playbook playbook.yml -i local
+      run: |
+        ansible-playbook playbook.yml -i local \
+          --extra-vars "official_apt_sources_replacements=[]"
