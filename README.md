@@ -18,11 +18,17 @@ Setup ansible on the *host* (not VM guest).
     ln -s ~/Software/ansible/bin/ansible-playbook ~/bin/
     ln -s ~/Software/ansible/bin/ansible ~/bin/
 
+## Usage
+
+Install on local machine.
+
+    ansible-playbook playbook.yml -i local -K
+
 ## Testing
 
 Before setting up a real machine I usually try this on up a [VirtualBox](https://www.virtualbox.org/) (see below). Once set up I can test the ansible playbook.
 
-    ansible-playbook playbook.yaml -i vbox -K
+    ansible-playbook playbook.yml -i vbox -K
 
 To easily create a new VM from scratch I use these commands. (Heavily inspired by https://www.perkin.org.uk/posts/create-virtualbox-vm-from-the-command-line.html)
 
