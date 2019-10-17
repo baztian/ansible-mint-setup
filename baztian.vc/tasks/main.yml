@@ -6,7 +6,8 @@
 - name: Update repos all packages
   apt:
     update_cache: yes
-- apt_repository:
+- name: Add apt repo for vs code
+  apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
     state: present
 - name: Install visual studio code package
