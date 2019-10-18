@@ -10,7 +10,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - role: baztian.vc
+         - role: baztian.vscode
 
 License
 -------

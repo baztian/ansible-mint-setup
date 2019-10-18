@@ -6,5 +6,5 @@
       tags: apt_upgrade
     - role: baztian.git
       tags: git
-    - role: baztian.vc
-      tags: vc
+    - role: baztian.vscode
+      tags: vscode
