@@ -6,6 +6,8 @@
       tags: apt_upgrade
     - role: baztian.git
       tags: git
+    - role: baztian.docker
+      tags: docker
     - role: baztian.vscode
       tags: vscode
     - role: baztian.jetbrains_toolbox
