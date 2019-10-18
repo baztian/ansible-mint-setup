@@ -4,9 +4,6 @@
     data: "{{ lookup('file', 'microsoft.asc') }}"
     id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
     state: present
-- name: Update repos all packages
-  apt:
-    update_cache: yes
 - name: Add apt repo for vs code
   apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
