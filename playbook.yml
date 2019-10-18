@@ -8,3 +8,5 @@
       tags: git
     - role: baztian.vscode
       tags: vscode
+    - role: baztian.jetbrains_toolbox
+      tags: jetbrains_toolbox
