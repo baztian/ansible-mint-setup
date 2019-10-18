@@ -1,0 +1,22 @@
+---
+- name: Check if already installed
+  stat:
+    path: "/opt/jetbrains-toolbox-{{ jetbrains_toolbox_version }}"
+  register: jetbrains_toolbox_directory
+- name: Download JetBrains Toolbox
+  get_url:
+    url: https://download.jetbrains.com/toolbox/jetbrains-toolbox-{{ jetbrains_toolbox_version }}.tar.gz
+    checksum: "sha256:{{ jetbrains_toolbox_sha256 }}"
+    dest: /tmp/
+  when: not jetbrains_toolbox_directory.stat.exists
+- name: Unarchive JetBrains Toolbox
+  unarchive:
+    src: /tmp/jetbrains-toolbox-{{ jetbrains_toolbox_version }}.tar.gz
+    dest: /opt/
+    remote_src: yes
+  when: not jetbrains_toolbox_directory.stat.exists
+- name: Symlink default JetBrains Toolbox
+  file:
+    src: "/opt/jetbrains-toolbox-{{ jetbrains_toolbox_version }}"
+    dest: "/opt/jetbrains-toolbox"
+    state: link
