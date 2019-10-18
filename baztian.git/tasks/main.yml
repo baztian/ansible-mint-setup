@@ -33,3 +33,27 @@
         source /opt/bash-git-prompt/gitprompt.sh
       fi
   become: no
+- name: Install hub
+  unarchive:
+    src: "https://github.com/github/hub/releases/download/v{{ hub_version }}/hub-linux-amd64-{{ hub_version }}.tgz"
+    dest: /opt
+    remote_src: yes
+- name: Symlink default hub
+  file:
+    src: "/opt/hub-linux-amd64-{{ hub_version }}"
+    dest: "/opt/hub"
+    state: link
+- name: Symlink hub bin
+  file:
+    src: "/opt/hub/bin/hub"
+    dest: "/usr/local/bin/hub"
+    state: link
+- name: Add hub git alias and setup bash completion
+  blockinfile:
+    path: ~/.bashrc
+    block: |
+      eval "$(hub alias -s)"
+      if [ -f ~/Software/hub/etc/hub.bash_completion.sh ]; then
+        . ~/Software/hub/etc/hub.bash_completion.sh
+      fi
+  become: no
