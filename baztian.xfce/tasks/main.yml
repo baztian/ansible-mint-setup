@@ -1,4 +1,9 @@
 ---
+- name: Install required packages
+# This should usually be in place if using an xfce distro
+  apt:
+    pkg:
+      - xfconf
 - block:
   - name: Solid background
     xfconf:
