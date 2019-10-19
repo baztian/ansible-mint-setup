@@ -5,6 +5,18 @@
     pkg:
       - xfconf
 - block:
+  - name: Lock screen on suspend
+    xfconf:
+      channel: xfce4-session
+      property: /xfce4-power-manager/lock-screen-suspend-hibernate
+      value_type: bool
+      value: "true"
+  - name: Launch Gnome Services
+    xfconf:
+      channel: xfce4-session
+      property: /compat/LaunchGNOME
+      value_type: bool
+      value: "true"
   - name: Solid background
     xfconf:
       channel: xfce4-desktop
