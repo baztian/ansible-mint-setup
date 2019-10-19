@@ -1,0 +1,6 @@
+---
+official_apt_sources_replacements:
+  - regexp: http://packages.linuxmint.com
+    replace: http://ftp.fau.de/mint/packages
+  - regexp: http://archive.ubuntu.com/ubuntu
+    replace: http://ftp.fau.de/ubuntu

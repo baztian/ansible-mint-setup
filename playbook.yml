@@ -4,6 +4,8 @@
   roles:
     - role: baztian.apt_upgrade
       tags: apt_upgrade
+    - role: baztian.xfce
+      tags: xfce
     - role: baztian.git
       tags: git
     - role: baztian.docker

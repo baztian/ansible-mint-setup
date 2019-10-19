@@ -1,0 +1,25 @@
+---
+- block:
+  - name: Solid background
+    xfconf:
+      channel: xfce4-desktop
+      property: /backdrop/screen0/monitor0/workspace0/image-style
+      value_type: int
+      value: "0"
+  - name: No Home icon on desktop
+    xfconf:
+      channel: xfce4-desktop
+      property: /desktop-icons/file-icons/show-home
+      value_type: bool
+      value: "false"
+  - name: Remove unused keyboard shortcuts
+    xfconf:
+      channel: xfce4-keyboard-shortcuts
+      value: dummy
+      value_type: string
+      property: "/xfwm4/custom/{{ item }}"
+      state: absent
+    with_items:
+      - <Alt>Insert # Add workspace
+      - <Alt>Delete # Delete last workspace
+  become: no
