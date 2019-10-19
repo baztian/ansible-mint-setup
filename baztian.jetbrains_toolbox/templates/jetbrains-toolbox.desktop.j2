@@ -1,8 +1,8 @@
 # {{ ansible_managed }}
 
 [Desktop Entry]
-Exec={{ ansible_env.PWD }}/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox %u
-Icon={{ ansible_env.PWD }}/.local/share/JetBrains/Toolbox/toolbox.svg
+Exec=/home/{{ ansible_env.SUDO_USER }}/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox %u
+Icon=/home/{{ ansible_env.SUDO_USER }}/.local/share/JetBrains/Toolbox/toolbox.svg
 MimeType=x-scheme-handler/jetbrains;
 Name=JetBrains Toolbox
 StartupNotify=false
