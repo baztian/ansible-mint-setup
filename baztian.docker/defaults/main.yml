@@ -1,0 +1,4 @@
+---
+docker_compose_version: 1.24.1
+docker_compose_sha1: ebe6d19586103e9822cefa6794a18425e622337e
+docker_compose_completion_sha1: cc23d97c1d1f710f55e774e9f486658aa52d6060

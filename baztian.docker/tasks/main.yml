@@ -1,0 +1,49 @@
+---
+- name: Install Docker dependencies
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+- name: Add Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+- name: Extract distribution base name (works on linux mint as well)
+  command: grep -oP 'UBUNTU_CODENAME=\K.*' /etc/os-release
+  register: distro
+  changed_when: False
+- name: Add Docker apt repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ distro.stdout }} stable
+- name: Install Docker
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+- name: Create docker group
+  group:
+    name: docker
+- name: Allow running Docker without sudo
+  user:
+    name: "{{ ansible_env.SUDO_USER }}"
+    groups: docker
+    append: yes
+- name: Download Docker Compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+    checksum: "sha1:{{ docker_compose_sha1 }}"
+    dest: /usr/local/bin/docker-compose
+    mode: u+x
+- name: Enable Docker Compose autocompletion
+  get_url:
+    url: https://raw.githubusercontent.com/docker/compose/{{ docker_compose_version }}/contrib/completion/bash/docker-compose
+    checksum: "sha1:{{ docker_compose_completion_sha1 }}"
+    dest: /etc/bash_completion.d/docker-compose
