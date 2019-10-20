@@ -24,6 +24,20 @@ Install on local machine.
 
     ansible-playbook playbook.yml -i local -K
 
+## Manual steps while running the Linux Mint installer
+
+1. Start _Install Linux Mint_
+1. _English_
+1. _German - German (no dead keys)_
+1. _Install third-party_
+1. _Erase disk_ plus _Encrypt_ plus _LVM_
+1. Generate _Security Key_ in KeePass
+1. _Berlin_
+1. _Name_ `<Firstname> <Lastname>`
+1. _Computer's name_ `vbox`
+1. _Username_ `<myuser>`
+1. _Require login_
+
 ## Testing
 
 Before setting up a real machine I usually try this on up a [VirtualBox](https://www.virtualbox.org/) (see below). Once set up I can test the ansible playbook.
@@ -95,16 +109,23 @@ Try the ansible script. If you want to start from the previous state again run
 
     VBoxManage snapshot $VM restore installer_finished
 
-## Manual steps while running the installer
+## Customization and development notes
 
-1. Start _Install Linux Mint_
-1. _English_
-1. _German - German (no dead keys)_
-1. _Install third-party_
-1. _Erase disk_ plus _Encrypt_ plus _LVM_
-1. Generate _Security Key_ in KeePass
-1. _Berlin_
-1. _Name_ `<Firstname> <Lastname>`
-1. _Computer's name_ `vbox`
-1. _Username_ `<myuser>`
-1. _Require login_
+The following notes might help you in developing and customizing the roles.
+
+### Identifying xfconf properties
+
+To browse Xfce configuration use `xfce4-settings-editor`.
+
+You can monitor so called channels from the command line with the `-m` switch of `xfconf-query`.
+
+    xfconf-query # list all channels available
+    xfconf-query -m -c xfce4-desktop -v
+
+To monitor all available channels use this one liner.
+
+    for i in $(xfconf-query); do (xfconf-query -m -c $i -v |awk '{print "'$i' " $0}' &) ;done
+
+You can cancel monitoring by issuing
+
+    killall xfconf-query
