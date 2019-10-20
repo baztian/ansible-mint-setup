@@ -1,0 +1,108 @@
+---
+- name: Install required packages
+# This should usually be in place if using an xfce distro
+  apt:
+    pkg:
+      - xfconf
+- block:
+  - name: Lock screen on suspend
+    xfconf:
+      channel: xfce4-session
+      property: /xfce4-power-manager/lock-screen-suspend-hibernate
+      value_type: bool
+      value: "true"
+  - name: Launch Gnome Services
+    xfconf:
+      channel: xfce4-session
+      property: /compat/LaunchGNOME
+      value_type: bool
+      value: "true"
+  - name: Solid background
+    xfconf:
+      channel: xfce4-desktop
+      property: /backdrop/screen0/monitor0/workspace0/image-style
+      value_type: int
+      value: "0"
+  - name: No Home icon on desktop
+    xfconf:
+      channel: xfce4-desktop
+      property: /desktop-icons/file-icons/show-home
+      value_type: bool
+      value: "false"
+  - name: Numlock on
+    xfconf:
+      channel: keyboards
+      property: /Default/Numlock
+      value_type: bool
+      value: "true"
+  - name: Remove unused keyboard shortcuts
+    xfconf:
+      channel: xfce4-keyboard-shortcuts
+      value: dummy
+      value_type: string
+      property: "/xfwm4/custom/{{ item }}"
+      state: absent
+    with_items:
+      - <Alt>space # Window operations menu
+      - <Super>Tab # Switch window for same avi_application
+      - <Alt>F10 # Maximize window
+      - <Alt>F9 # Hide window
+      - <Alt>F7 # Move window
+      - <Alt>F8 # Resize window
+      - <Alt>F6 # Stick window
+      - <Shift><Alt>Page_Up # Raise window
+      - <Shift><Alt>Page_Down # Lower window
+      - <Alt>F12 # Toggle above
+      - <Alt>F11 # Toggle fullscreen
+      - <Primary><Alt>Home # Move window to previous workspace
+      - <Primary><Alt>End # Move window to next workspace
+      - <Primary><Alt>KP_1 # Move window to workspace 1
+      - <Primary><Alt>KP_2 # Move window to workspace 2
+      - <Primary><Alt>KP_3 # Move window to workspace 3
+      - <Primary><Alt>KP_4 # Move window to workspace 4
+      - <Primary><Alt>KP_5 # Move window to workspace 5
+      - <Primary><Alt>KP_6 # Move window to workspace 6
+      - <Primary><Alt>KP_7 # Move window to workspace 7
+      - <Primary><Alt>KP_8 # Move window to workspace 8
+      - <Primary><Alt>KP_9 # Move window to workspace 9
+      - <Alt><Control>Home # Move window to previous workspace
+      - <Alt><Control>End # Move window to next workspace
+      - <Alt><Control>KP_1 # Move window to workspace 1
+      - <Alt><Control>KP_2 # Move window to workspace 2
+      - <Alt><Control>KP_3 # Move window to workspace 3
+      - <Alt><Control>KP_4 # Move window to workspace 4
+      - <Alt><Control>KP_5 # Move window to workspace 5
+      - <Alt><Control>KP_6 # Move window to workspace 6
+      - <Alt><Control>KP_7 # Move window to workspace 7
+      - <Alt><Control>KP_8 # Move window to workspace 8
+      - <Alt><Control>KP_9 # Move window to workspace 9
+      - <Primary><Alt>d # Show desktop
+      - <Control><Alt>d # Show desktop
+      - <Control>F1 # Workspace 1
+      - <Control>F2 # Workspace 2
+      - <Control>F3 # Workspace 3
+      - <Control>F4 # Workspace 4
+      - <Control>F5 # Workspace 5
+      - <Control>F6 # Workspace 6
+      - <Control>F7 # Workspace 7
+      - <Control>F8 # Workspace 8
+      - <Control>F9 # Workspace 9
+      - <Control>F10 # Workspace 10
+      - <Control>F11 # Workspace 11
+      - <Control>F12 # Workspace 12
+      - <Primary>F1 # Workspace 1
+      - <Primary>F2 # Workspace 2
+      - <Primary>F3 # Workspace 3
+      - <Primary>F4 # Workspace 4
+      - <Primary>F5 # Workspace 5
+      - <Primary>F6 # Workspace 6
+      - <Primary>F7 # Workspace 7
+      - <Primary>F8 # Workspace 8
+      - <Primary>F9 # Workspace 9
+      - <Primary>F10 # Workspace 10
+      - <Primary>F11 # Workspace 11
+      - <Primary>F12 # Workspace 12
+      - <Alt>Insert # Add workspace
+      - <Alt>Delete # Delete last workspace
+
+  become: no
