@@ -15,8 +15,7 @@ Setup ansible on the *host* (not VM guest).
     pip install ansible==2.8.5
     deactivate
     mkdir -p ~/bin
-    ln -s ~/Software/ansible/bin/ansible-playbook ~/bin/
-    ln -s ~/Software/ansible/bin/ansible ~/bin/
+    for i in ~/Software/ansible/bin/ansible* ; do ln -sf $i ~/bin/ ; done
 
 ## Usage
 
