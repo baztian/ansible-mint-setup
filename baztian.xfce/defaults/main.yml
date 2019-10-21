@@ -1,6 +1,66 @@
 ---
-official_apt_sources_replacements:
-  - regexp: http://packages.linuxmint.com
-    replace: http://ftp.fau.de/mint/packages
-  - regexp: http://archive.ubuntu.com/ubuntu
-    replace: http://ftp.fau.de/ubuntu
+xfce_shortcuts_remove:
+- <Alt>space # Window operations menu
+- <Super>Tab # Switch window for same avi_application
+- <Alt>F10 # Maximize window
+- <Alt>F9 # Hide window
+- <Alt>F7 # Move window
+- <Alt>F8 # Resize window
+- <Alt>F6 # Stick window
+- <Shift><Alt>Page_Up # Raise window
+- <Shift><Alt>Page_Down # Lower window
+- <Alt>F12 # Toggle above
+- <Alt>F11 # Toggle fullscreen
+- <Primary><Alt>Home # Move window to previous workspace
+- <Primary><Alt>End # Move window to next workspace
+- <Primary><Alt>KP_1 # Move window to workspace 1
+- <Primary><Alt>KP_2 # Move window to workspace 2
+- <Primary><Alt>KP_3 # Move window to workspace 3
+- <Primary><Alt>KP_4 # Move window to workspace 4
+- <Primary><Alt>KP_5 # Move window to workspace 5
+- <Primary><Alt>KP_6 # Move window to workspace 6
+- <Primary><Alt>KP_7 # Move window to workspace 7
+- <Primary><Alt>KP_8 # Move window to workspace 8
+- <Primary><Alt>KP_9 # Move window to workspace 9
+- <Alt><Control>Home # Move window to previous workspace
+- <Alt><Control>End # Move window to next workspace
+- <Alt><Control>KP_1 # Move window to workspace 1
+- <Alt><Control>KP_2 # Move window to workspace 2
+- <Alt><Control>KP_3 # Move window to workspace 3
+- <Alt><Control>KP_4 # Move window to workspace 4
+- <Alt><Control>KP_5 # Move window to workspace 5
+- <Alt><Control>KP_6 # Move window to workspace 6
+- <Alt><Control>KP_7 # Move window to workspace 7
+- <Alt><Control>KP_8 # Move window to workspace 8
+- <Alt><Control>KP_9 # Move window to workspace 9
+- <Primary><Alt>d # Show desktop
+- <Control><Alt>d # Show desktop
+- <Control>F1 # Workspace 1
+- <Control>F2 # Workspace 2
+- <Control>F3 # Workspace 3
+- <Control>F4 # Workspace 4
+- <Control>F5 # Workspace 5
+- <Control>F6 # Workspace 6
+- <Control>F7 # Workspace 7
+- <Control>F8 # Workspace 8
+- <Control>F9 # Workspace 9
+- <Control>F10 # Workspace 10
+- <Control>F11 # Workspace 11
+- <Control>F12 # Workspace 12
+- <Primary>F1 # Workspace 1
+- <Primary>F2 # Workspace 2
+- <Primary>F3 # Workspace 3
+- <Primary>F4 # Workspace 4
+- <Primary>F5 # Workspace 5
+- <Primary>F6 # Workspace 6
+- <Primary>F7 # Workspace 7
+- <Primary>F8 # Workspace 8
+- <Primary>F9 # Workspace 9
+- <Primary>F10 # Workspace 10
+- <Primary>F11 # Workspace 11
+- <Primary>F12 # Workspace 12
+- <Alt>Insert # Add workspace
+- <Alt>Delete # Delete last workspace
+xfce_terminal:
+  terminalrc_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/34646dc3ffe9e61f8e6b21dc6d9eca26c6c253b6/terminalrc
+  accels_scm_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/34646dc3ffe9e61f8e6b21dc6d9eca26c6c253b6/accels.scm
