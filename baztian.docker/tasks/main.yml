@@ -36,6 +36,12 @@
     name: "{{ ansible_env.SUDO_USER }}"
     groups: docker
     append: yes
+- name: Add dockstats alias
+  lineinfile:
+    path: ~/.bashrc
+    regexp: '^alias dockstats='
+    line: "{% raw %}alias dockstats='docker stats --no-stream --format \"table {{.Name}}\t{{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\"'{% endraw %}"
+  become: no
 - name: Download Docker Compose
   get_url:
     url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
