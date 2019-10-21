@@ -13,5 +13,6 @@ jobs:
       uses: ansible/ansible-lint-action@master
     - name: Execute ansible playbook
       run: |
+        export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER/bus
         ansible-playbook playbook.yml -i local \
-          --skip-tags apt_upgrade,xfce
+          --skip-tags apt_upgrade
