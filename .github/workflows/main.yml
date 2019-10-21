@@ -13,5 +13,9 @@ jobs:
       uses: ansible/ansible-lint-action@master
     - name: Execute ansible playbook
       run: |
+        export $(dbus-launch)
+        eval $(dbus-launch --sh-syntax)
+        export DBUS_SESSION_BUS_ADDRESS
+        export DBUS_SESSION_BUS_PID
         ansible-playbook playbook.yml -i local \
           --skip-tags apt_upgrade
