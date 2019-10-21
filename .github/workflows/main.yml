@@ -14,4 +14,4 @@ jobs:
     - name: Execute ansible playbook
       run: |
         ansible-playbook playbook.yml -i local \
-          --skip-tags apt_upgrade,xfce
+          --skip-tags apt_upgrade

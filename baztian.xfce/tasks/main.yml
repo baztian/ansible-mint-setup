@@ -4,6 +4,7 @@
   apt:
     pkg:
       - xfconf
+      - dbus
 - block:
   - name: Lock screen on suspend
     xfconf:
