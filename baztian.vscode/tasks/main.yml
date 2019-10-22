@@ -3,10 +3,16 @@
   apt_key:
     data: "{{ lookup('file', 'microsoft.asc') }}"
     id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+    # setting keyring required to not collide with
+    # https://github.com/microsoft/vscode/blob/master/resources/linux/debian/postinst.template
+    keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
     state: present
 - name: Add apt repo for vs code
   apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    # setting filename required to not collide with
+    # https://github.com/microsoft/vscode/blob/master/resources/linux/debian/postinst.template
+    filename: vscode
     state: present
 - name: Install visual studio code package
   apt:
