@@ -13,7 +13,7 @@
   apt_repository:
     repo: "{{ item  }} http://ppa.launchpad.net/jtaylor/keepass/ubuntu {{ distro.stdout }} main"
     state: present
-  with_items: 
+  with_items:
     - deb
     - deb-src
 - name: Add KeepassKeeFox Plugin Apt signing key on remote server to keyring
@@ -26,7 +26,7 @@
   apt_repository:
     repo: "{{ item  }} http://ppa.launchpad.net/dlech/keepass2-plugins/ubuntu {{ distro.stdout }} main"
     state: present
-  with_items: 
+  with_items:
     - deb
     - deb-src
 - name: Install keepass packages
@@ -36,3 +36,27 @@
       - xsel
       - xdotool
       - keepass2-plugin-rpc
+- name: Check if KPScript already installed
+  stat:
+    path: /usr/lib/keepass2/KPScript.exe
+  register: kpscript_bin
+- name: Download KPScript
+  get_url:
+    url: http://keepass.info/extensions/v2/kpscript/KPScript-{{ kpscript_version }}.zip
+    checksum: "sha256:{{ kpscript_sha256 }}"
+    dest: /tmp/
+  when: not kpscript_bin.stat.exists
+- name: Unarchive KPScript
+  unarchive:
+    src: /tmp/KPScript-{{ kpscript_version }}.zip
+    dest: /tmp
+    remote_src: yes
+  when: not kpscript_bin.stat.exists
+- name: Install KPScript binary
+  command: install -D -m644 /tmp/KPScript.exe "/usr/lib/keepass2/KPScript.exe"
+  when: not kpscript_bin.stat.exists
+- name: Install kpscript helper script
+  copy:
+    src: kpscript
+    dest: /usr/local/bin/kpscript
+    mode: "755"
