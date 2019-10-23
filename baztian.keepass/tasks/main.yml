@@ -35,7 +35,10 @@
       - keepass2
       - xsel
       - xdotool
+      # For firefox integration
       - keepass2-plugin-rpc
+      # For (manual) gnome keyring integration
+      - libsecret-tools
 - name: Check if KPScript already installed
   stat:
     path: /usr/lib/keepass2/KPScript.exe
