@@ -8,6 +8,8 @@
       tags: xfce
     - role: baztian.git
       tags: git
+    - role: baztian.keepass
+      tags: keepass
     - role: baztian.docker
       tags: docker
     - role: baztian.vscode
