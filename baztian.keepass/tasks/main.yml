@@ -33,4 +33,6 @@
   apt:
     pkg:
       - keepass2
+      - xsel
+      - xdotool
       - keepass2-plugin-rpc
