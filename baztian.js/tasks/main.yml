@@ -1,0 +1,20 @@
+---
+- name: Extract distribution base name (works on linux mint as well)
+  command: grep -oP 'UBUNTU_CODENAME=\K.*' /etc/os-release
+  register: distro
+  changed_when: False
+- name: Add nodesource signing key on remote server to keyring
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    id: 9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280
+    state: present
+- name: Add apt repo for Nodejs
+  apt_repository:
+    repo: "{{ item  }} https://deb.nodesource.com/node_10.x {{ distro.stdout }} main"
+    state: present
+  with_items:
+    - deb
+    - deb-src
+- name: Install NodeJS
+  apt:
+    pkg: nodejs
