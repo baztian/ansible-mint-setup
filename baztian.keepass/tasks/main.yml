@@ -7,7 +7,6 @@
   apt_key:
     data: "{{ lookup('file', 'julianTaylorPPA.gpg') }}"
     id: 57A0E8DEA026F8D8173E90A57858088158B80F90
-    # setting keyring required to not collide with
     state: present
 - name: Add apt repo for Keepass 2
   apt_repository:
@@ -20,7 +19,6 @@
   apt_key:
     data: "{{ lookup('file', 'davidLechnerPPA.gpg') }}"
     id: A8BD96F8FD24E96B60232807B3B4C3CECC10C662
-    # setting keyring required to not collide with
     state: present
 - name: Add apt repo for KeeFox Plugin
   apt_repository:
