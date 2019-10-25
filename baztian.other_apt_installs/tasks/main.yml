@@ -2,3 +2,8 @@
 - name: Install various packages
   apt:
     pkg: "{{ various_apt_packages }}"
+- name: Install zoom.us
+  # https://support.zoom.us/hc/en-us/articles/205759689-New-Updates-for-Linux
+  apt:
+    deb: "{{ zoom_deb_url }}"
+  tags: zoom_us
