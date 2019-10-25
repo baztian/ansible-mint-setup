@@ -16,3 +16,5 @@
       tags: vscode
     - role: baztian.jetbrains_toolbox
       tags: jetbrains_toolbox
+    - role: baztian.other_apt_installs
+      tags: other_apt_installs
