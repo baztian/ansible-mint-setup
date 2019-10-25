@@ -7,3 +7,13 @@
   apt:
     deb: "{{ zoom_deb_url }}"
   tags: zoom_us
+- name: Download Microsoft Teams client
+  get_url:
+    url: "https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v{{ ms_teams_version }}/teams-for-linux_{{ ms_teams_version }}_amd64.deb"
+    checksum: "sha1:{{ ms_teams_sha1 }}"
+    dest: "/tmp/teams-for-linux_{{ ms_teams_version }}_amd64.deb"
+  tags: ms_teams
+- name: Install Microsoft Teams client
+  apt:
+    deb: "/tmp/teams-for-linux_{{ ms_teams_version }}_amd64.deb"
+  tags: ms_teams

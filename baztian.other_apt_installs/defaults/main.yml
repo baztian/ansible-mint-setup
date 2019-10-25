@@ -6,3 +6,5 @@ various_apt_packages:
 - inkscape
 - darktable
 zoom_deb_url: "https://zoom.us/client/latest/zoom_amd64.deb"
+ms_teams_version: 0.7.0
+ms_teams_sha1: 3a0239af74cd374bb27290820b1cc7d29b8cea86
