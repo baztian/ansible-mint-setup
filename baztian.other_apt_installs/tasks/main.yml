@@ -1,0 +1,4 @@
+---
+- name: Install various packages
+  apt:
+    pkg: "{{ various_apt_packages }}"

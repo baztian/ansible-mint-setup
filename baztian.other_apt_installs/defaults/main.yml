@@ -1,0 +1,7 @@
+---
+various_apt_packages:
+- remmina
+- remmina-plugin-rdp
+- remmina-plugin-vnc
+- inkscape
+- darktable
