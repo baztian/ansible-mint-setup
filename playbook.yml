@@ -18,5 +18,7 @@
       tags: jetbrains_toolbox
     - role: baztian.js
       tags: js
+    - role: baztian.dev_tools
+      tags: dev_tools
     - role: baztian.other_apt_installs
       tags: other_apt_installs
