@@ -33,3 +33,10 @@
   apt:
     pkg: yarn
   tags: yarn
+- name: Install browser-sync
+  npm:
+    name: browser-sync
+    global: yes
+  environment:
+    npm_config_prefix: /usr/local
+  tags: browser-sync
