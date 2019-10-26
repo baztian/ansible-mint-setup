@@ -33,10 +33,17 @@
   apt:
     pkg: yarn
   tags: yarn
+- name: Install serverless framework
+  npm:
+    name: serverless
+    global: yes
+  environment:
+    npm_config_prefix: "{{ npm_config_prefix }}"
+  tags: serverless-framework
 - name: Install browser-sync
   npm:
     name: browser-sync
     global: yes
   environment:
-    npm_config_prefix: /usr/local
+    npm_config_prefix: "{{ npm_config_prefix }}"
   tags: browser-sync
