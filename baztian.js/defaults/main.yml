@@ -1,0 +1,5 @@
+---
+npm_config_prefix: /usr/local
+# See https://github.com/nodesource/distributions/blob/master/README.md#debinstall
+# for available major releases
+node_major_release: 10

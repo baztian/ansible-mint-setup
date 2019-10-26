@@ -1,0 +1,49 @@
+---
+- name: Extract distribution base name (works on linux mint as well)
+  command: grep -oP 'UBUNTU_CODENAME=\K.*' /etc/os-release
+  register: distro
+  changed_when: False
+- name: Add nodesource signing key on remote server to keyring
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    id: 9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280
+    state: present
+- name: Add apt repo for Nodejs
+  apt_repository:
+    repo: "{{ item  }} https://deb.nodesource.com/node_{{ node_major_release }}.x {{ distro.stdout }} main"
+    state: present
+  with_items:
+    - deb
+    - deb-src
+- name: Install NodeJS
+  apt:
+    pkg: nodejs
+- name: Add yarn signing key on remote server to keyring
+  apt_key:
+    url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    id: 72ECF46A56B4AD39C907BBB71646B01B86E50310
+    state: present
+  tags: yarn
+- name: Add apt repo for yarn
+  apt_repository:
+    repo: "deb https://dl.yarnpkg.com/debian/ stable main"
+    state: present
+  tags: yarn
+- name: Install yarn
+  apt:
+    pkg: yarn
+  tags: yarn
+- name: Install serverless framework
+  npm:
+    name: serverless
+    global: yes
+  environment:
+    npm_config_prefix: "{{ npm_config_prefix }}"
+  tags: serverless-framework
+- name: Install browser-sync
+  npm:
+    name: browser-sync
+    global: yes
+  environment:
+    npm_config_prefix: "{{ npm_config_prefix }}"
+  tags: browser-sync
