@@ -3,11 +3,11 @@
         python environments
   apt:
     pkg: python3-venv
-- name: Prepare virtual env for python package
+- name: Prepare virtual env for {{ pkg }} python package
   command: python3 -m venv /opt/{{ pkg }}
   args:
     creates: /opt/{{ pkg }}
-- name: Install python package
+- name: Install {{ pkg }} python package
   command: /opt/{{ pkg }}/bin/pip install {{ pkg }}
   args:
     creates: /opt/{{ pkg }}/bin/{{ bin }}
