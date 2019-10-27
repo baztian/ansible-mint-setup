@@ -1,4 +1,6 @@
 ---
+various_dev_apt_packages:
+  - jq
 # See https://www.getpostman.com/downloads/release-notes#changelog-linux-app
 # for changelog and SHA1 keys
 postman_version: 7.10.0

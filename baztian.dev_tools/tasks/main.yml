@@ -1,4 +1,8 @@
 ---
+- name: Install various dev packages
+  apt:
+    pkg: "{{ various_dev_apt_packages }}"
+  tags: various_dev_apt_packages
 - name: Check if already installed
   stat:
     path: /opt/Postman{{ postman_version }}
