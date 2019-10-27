@@ -12,7 +12,7 @@
   vars:
       pkg: yq
   tags: yq
-- name: Check if already installed
+- name: Check if Postman App already installed
   stat:
     path: /opt/Postman{{ postman_version }}
   register: postman_directory
