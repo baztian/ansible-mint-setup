@@ -1,0 +1,18 @@
+---
+- name: Install python venv to allow for software install inside virtual
+        python environments
+  apt:
+    pkg: python3-venv
+- name: Prepare virtual env for python package
+  command: python3 -m venv /opt/{{ pkg }}
+  args:
+    creates: /opt/{{ pkg }}
+- name: Install python package
+  command: /opt/{{ pkg }}/bin/pip install {{ pkg }}
+  args:
+    creates: /opt/{{ pkg }}/bin/{{ pkg }}
+- name: Symlink binary from python package
+  file:
+    src: "/opt/{{ pkg }}/bin/{{ pkg }}"
+    dest: "/usr/local/bin/{{ pkg }}"
+    state: link

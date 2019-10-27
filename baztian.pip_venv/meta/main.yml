@@ -1,0 +1,15 @@
+galaxy_info:
+  author: baztian
+  description: Role for installing python modules inside a new virtual env
+  license: GPLv3
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  galaxy_tags:
+    - pip
+    - venv
+    - virtualenv
+    - python
+dependencies: []

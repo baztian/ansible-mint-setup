@@ -3,26 +3,14 @@
   apt:
     pkg: "{{ various_dev_apt_packages }}"
   tags: various_dev_apt_packages
-- name: Install python venv to allow for software install inside virtual
-        python environments
-  apt:
-    pkg: python3-venv
-  tags: yq
-- name: Prepare yq virtual env
-  command: python3 -m venv /opt/yq
-  args:
-    creates: /opt/yq
-  tags: yq
 - name: Install yq
-  command: /opt/yq/bin/pip install yq
-  args:
-    creates: /opt/yq/bin/yq
-  tags: yq
-- name: Symlink yq binary
-  file:
-    src: "/opt/yq/bin/yq"
-    dest: "/usr/local/bin/yq"
-    state: link
+  include_role:
+    name: baztian.pip_venv
+    apply:
+      tags:
+        - yq
+  vars:
+      pkg: yq
   tags: yq
 - name: Check if already installed
   stat:
