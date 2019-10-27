@@ -3,6 +3,37 @@
   apt:
     pkg: "{{ various_dev_apt_packages }}"
   tags: various_dev_apt_packages
+- name: Install ansible
+  include_role:
+    name: baztian.pip_venv
+    apply:
+      tags:
+        - ansible
+  vars:
+      pkg: ansible
+      version: 2.8.5
+      bin:
+        - ansible
+        - ansible-config
+        - ansible-connection
+        - ansible-console
+        - ansible-doc
+        - ansible-galaxy
+        - ansible-inventory
+        - ansible-playbook
+        - ansible-pull
+        - ansible-vault
+  tags: ansible
+- name: Install ansible-lint
+  include_role:
+    name: baztian.pip_venv
+    apply:
+      tags:
+        - ansible_lint
+  vars:
+      pkg: ansible-lint
+      version: 4.1.0
+  tags: ansible_lint
 - name: Install yq
   include_role:
     name: baztian.pip_venv
