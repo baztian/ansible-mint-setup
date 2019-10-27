@@ -10,9 +10,9 @@
 - name: Install python package
   command: /opt/{{ pkg }}/bin/pip install {{ pkg }}
   args:
-    creates: /opt/{{ pkg }}/bin/{{ pkg }}
+    creates: /opt/{{ pkg }}/bin/{{ bin }}
 - name: Symlink binary from python package
   file:
-    src: "/opt/{{ pkg }}/bin/{{ pkg }}"
-    dest: "/usr/local/bin/{{ pkg }}"
+    src: "/opt/{{ pkg }}/bin/{{ bin }}"
+    dest: "/usr/local/bin/{{ bin }}"
     state: link

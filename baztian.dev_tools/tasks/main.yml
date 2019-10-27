@@ -12,6 +12,16 @@
   vars:
       pkg: yq
   tags: yq
+- name: Install jpterm
+  include_role:
+    name: baztian.pip_venv
+    apply:
+      tags:
+        - jpterm
+  vars:
+      pkg: jmespath-terminal
+      bin: jpterm
+  tags: jpterm
 - name: Check if Postman App already installed
   stat:
     path: /opt/Postman{{ postman_version }}
