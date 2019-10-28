@@ -57,7 +57,7 @@
   tags: jpterm
 - name: Check if Postman App already installed
   stat:
-    path: /opt/Postman{{ postman_version }}
+    path: /opt/Postman-{{ postman_version }}
   register: postman_directory
   tags: postman
 - name: Install packages required by Postman App
@@ -70,26 +70,26 @@
   get_url:
     url: https://dl.pstmn.io/download/version/{{ postman_version }}/linux64
     checksum: "sha1:{{ postman_sha1 }}"
-    dest: /tmp/postman{{ postman_version }}.tar.gz
+    dest: /tmp/Postman-{{ postman_version }}.tar.gz
   when: not postman_directory.stat.exists
   tags: postman
 - name: Create Postman app directory
   file:
-    path: /opt/Postman{{ postman_version }}
+    path: /opt/Postman-{{ postman_version }}
     state: directory
   tags: postman
 - name: Unarchive Postman App
   unarchive:
-    src: /tmp/postman{{ postman_version }}.tar.gz
+    src: /tmp/Postman-{{ postman_version }}.tar.gz
     extra_opts:
       - "--strip-components=1"
-    dest: /opt/Postman{{ postman_version }}
+    dest: /opt/Postman-{{ postman_version }}
     remote_src: yes
   when: not postman_directory.stat.exists
   tags: postman
 - name: Symlink default Postman version
   file:
-    src: "/opt/Postman{{ postman_version }}"
+    src: "Postman-{{ postman_version }}"
     dest: "/opt/Postman"
     state: link
   tags: postman
