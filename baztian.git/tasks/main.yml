@@ -41,7 +41,7 @@
     remote_src: yes
 - name: Symlink default hub
   file:
-    src: "/opt/hub-linux-amd64-{{ hub_version }}"
+    src: "hub-linux-amd64-{{ hub_version }}"
     dest: "/opt/hub"
     state: link
 - name: Symlink hub bin
