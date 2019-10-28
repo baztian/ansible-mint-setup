@@ -3,6 +3,21 @@
   apt:
     pkg: "{{ various_dev_apt_packages }}"
   tags: various_dev_apt_packages
+- name: Add Insomnia signing key on remote server to keyring
+  apt_key:
+    url: https://insomnia.rest/keys/debian-public.key.asc
+    id: 8756C4F765C9AC3CB6B85D62379CE192D401AB61
+    state: present
+  tags: insomnia
+- name: Add apt repo for Insomnia
+  apt_repository:
+    repo: "deb https://dl.bintray.com/getinsomnia/Insomnia /"
+    state: present
+  tags: insomnia
+- name: Install Insomnia
+  apt:
+    pkg: insomnia
+  tags: insomnia
 - name: Install ansible
   include_role:
     name: baztian.pip_venv
