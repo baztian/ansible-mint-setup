@@ -3,6 +3,21 @@
   apt:
     pkg: "{{ various_dev_apt_packages }}"
   tags: various_dev_apt_packages
+- name: Add Insomnia signing key on remote server to keyring
+  apt_key:
+    url: https://insomnia.rest/keys/debian-public.key.asc
+    id: 8756C4F765C9AC3CB6B85D62379CE192D401AB61
+    state: present
+  tags: insomnia
+- name: Add apt repo for Insomnia
+  apt_repository:
+    repo: "deb https://dl.bintray.com/getinsomnia/Insomnia /"
+    state: present
+  tags: insomnia
+- name: Install Insomnia
+  apt:
+    pkg: insomnia
+  tags: insomnia
 - name: Install ansible
   include_role:
     name: baztian.pip_venv
@@ -55,9 +70,45 @@
       version: 0.2.1
       bin: jpterm
   tags: jpterm
+- name: Check if jid already installed
+  stat:
+    path: /opt/jid-{{ jid_version }}
+  register: jid_directory
+  tags: jid
+- name: Download jid
+  get_url:
+    url: "https://github.com/simeji/jid/releases/download/v{{ jid_version }}/jid_linux_amd64.zip"
+    checksum: "sha256:{{ jid_sha256 }}"
+    dest: "/tmp/jid-{{ jid_version }}.zip"
+  tags: jid
+  when: not jid_directory.stat.exists
+- name: Create jid directory
+  file:
+    path: "/opt/jid-{{ jid_version }}"
+    state: directory
+  tags: jid
+- name: Install jid
+  unarchive:
+    src: "/tmp/jid-{{ jid_version }}.zip"
+    dest: "/opt/jid-{{ jid_version }}"
+    remote_src: yes
+  tags: jid
+  when: not jid_directory.stat.exists
+- name: Symlink default jid
+  file:
+    src: "jid-{{ jid_version }}"
+    dest: "/opt/jid"
+    state: link
+  tags: jid
+- name: Symlink jid bin
+  file:
+    src: "/opt/jid/jid"
+    dest: "/usr/local/bin/jid"
+    state: link
+  tags: jid
 - name: Check if Postman App already installed
   stat:
-    path: /opt/Postman{{ postman_version }}
+    path: /opt/Postman-{{ postman_version }}
   register: postman_directory
   tags: postman
 - name: Install packages required by Postman App
@@ -70,26 +121,26 @@
   get_url:
     url: https://dl.pstmn.io/download/version/{{ postman_version }}/linux64
     checksum: "sha1:{{ postman_sha1 }}"
-    dest: /tmp/postman{{ postman_version }}.tar.gz
+    dest: /tmp/Postman-{{ postman_version }}.tar.gz
   when: not postman_directory.stat.exists
   tags: postman
 - name: Create Postman app directory
   file:
-    path: /opt/Postman{{ postman_version }}
+    path: /opt/Postman-{{ postman_version }}
     state: directory
   tags: postman
 - name: Unarchive Postman App
   unarchive:
-    src: /tmp/postman{{ postman_version }}.tar.gz
+    src: /tmp/Postman-{{ postman_version }}.tar.gz
     extra_opts:
       - "--strip-components=1"
-    dest: /opt/Postman{{ postman_version }}
+    dest: /opt/Postman-{{ postman_version }}
     remote_src: yes
   when: not postman_directory.stat.exists
   tags: postman
 - name: Symlink default Postman version
   file:
-    src: "/opt/Postman{{ postman_version }}"
+    src: "Postman-{{ postman_version }}"
     dest: "/opt/Postman"
     state: link
   tags: postman
