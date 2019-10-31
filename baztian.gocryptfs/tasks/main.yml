@@ -1,0 +1,30 @@
+---
+- name: Check if gocryptfs already installed
+  stat:
+    path: /opt/gocryptfs-{{ gocryptfs_version }}/gocryptfs
+  register: gocryptfs_bin
+- name: Download gocryptfs
+  get_url:
+    url: https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+    dest: /tmp/
+  when: not gocryptfs_bin.stat.exists
+- name: Create goccryptfs directory
+  file:
+    path: /opt/gocryptfs-{{ gocryptfs_version }}
+    state: directory
+- name: Unarchive gocryptfs
+  unarchive:
+    src: /tmp/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+    dest: /opt/gocryptfs-{{ gocryptfs_version }}
+    remote_src: yes
+  when: not gocryptfs_bin.stat.exists
+- name: Symlink default gocryptfs
+  file:
+    src: "gocryptfs-{{ gocryptfs_version }}"
+    dest: "/opt/gocryptfs"
+    state: link
+- name: Symlink gocryptfs bin
+  file:
+    src: "/opt/gocryptfs/gocryptfs"
+    dest: "/usr/local/bin/gocryptfs"
+    state: link
