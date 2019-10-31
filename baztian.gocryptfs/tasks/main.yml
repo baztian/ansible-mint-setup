@@ -5,10 +5,24 @@
   register: gocryptfs_bin
 - name: Download gocryptfs
   get_url:
-    url: https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+    url: "{{ item }}"
     dest: /tmp/
+  with_items:
+    - https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+    - https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc
   when: not gocryptfs_bin.stat.exists
-- name: Create goccryptfs directory
+- name: Deamor gocryptfs GPG signature
+  command: gpg --dearmor gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc
+  args:
+    chdir: /tmp
+    creates: gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc.gpg
+  when: not gocryptfs_bin.stat.exists
+- name: Verify gocryptfs signature
+  command: gpg --dry-run --no-default-keyring --keyring {{ role_path }}/files/gocryptfs-signing-key.pub.gpg --homedir ./ --verify gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc.gpg gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+  args:
+    chdir: /tmp
+  when: not gocryptfs_bin.stat.exists
+- name: Create gocryptfs directory
   file:
     path: /opt/gocryptfs-{{ gocryptfs_version }}
     state: directory
