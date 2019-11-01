@@ -18,6 +18,11 @@
   apt:
     pkg: insomnia
   tags: insomnia
+- name: Add fixed launcher for Insomnia
+  copy:
+    src: insomnia.desktop
+    dest: /usr/local/share/applications/insomnia.desktop
+  tags: insomnia
 - name: Install ansible
   include_role:
     name: baztian.pip_venv
