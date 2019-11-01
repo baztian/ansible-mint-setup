@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Calibre
+Comment=E-book library management
+Comment[es]=aplicación para la gestión de libros electrónicos
+Comment[de]=E-Book Bibliotheksverwaltung
+Exec=calibre
+Icon=/opt/calibre/resources/images/lt.png
+Categories=Office;Database;FileTools;Viewer;Qt;

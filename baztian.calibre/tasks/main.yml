@@ -1,0 +1,39 @@
+---
+- name: Check if Calibre {{ calibre_version }} already installed
+  stat:
+    path: /opt/calibre-{{ calibre_version }}/calibre
+  register: calibre_bin
+- name: Download Calibre {{ calibre_version }}
+  get_url:
+    url: https://download.calibre-ebook.com/{{ calibre_version }}/calibre-{{ calibre_version }}-x86_64.txz
+    checksum: "sha256:{{ calibre_sha256 }}"
+    dest: /tmp/calibre-{{ calibre_version }}.txz
+  when: not calibre_bin.stat.exists
+- name: Create Calibre directory
+  file:
+    path: /opt/calibre-{{ calibre_version }}
+    state: directory
+- name: Unarchive Calibre {{ calibre_version }}
+  unarchive:
+    src: /tmp/calibre-{{ calibre_version }}.txz
+    dest: /opt/calibre-{{ calibre_version }}
+    remote_src: yes
+  when: not calibre_bin.stat.exists
+- name: Symlink default Calibre version
+  file:
+    src: "calibre-{{ calibre_version }}"
+    dest: "/opt/calibre"
+    state: link
+- name: Symlink Calibre binary
+  file:
+    src: "/opt/calibre/calibre"
+    dest: "/usr/local/bin/calibre"
+    state: link
+- name: Create launcher directory
+  file:
+    path: /usr/local/share/applications
+    state: directory
+- name: Copy Calibre desktop launcher
+  copy:
+    src: calibre.desktop
+    dest: /usr/local/share/applications/calibre.desktop
