@@ -9,6 +9,7 @@
   apt:
     update_cache: yes
     upgrade: safe
+    cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
 - name: Remove useless apt packages and dependencies
   apt:
     autoremove: yes

@@ -1,0 +1,56 @@
+---
+- name: Check if gocryptfs already installed
+  stat:
+    path: /opt/gocryptfs-{{ gocryptfs_version }}/gocryptfs
+  register: gocryptfs_bin
+- name: Download gocryptfs
+  get_url:
+    url: "{{ item }}"
+    dest: /tmp/
+  with_items:
+    - https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+    - https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc
+  when: not gocryptfs_bin.stat.exists
+- name: Copy gocryptfs GPG signing key
+  copy:
+      src: "{{ role_path }}/files/gocryptfs-signing-key.pub"
+      dest: /tmp/
+  when: not gocryptfs_bin.stat.exists
+- name: Deamor gocryptfs GPG signing key
+  # https://stackoverflow.com/questions/46072548/verify-a-file-against-asc-using-gpg-without-importing-keys-file/55890428#55890428
+  command: gpg --dearmor gocryptfs-signing-key.pub
+  args:
+    chdir: /tmp
+    creates: gocryptfs-signing-key.pub.gpg
+  when: not gocryptfs_bin.stat.exists
+- name: Deamor gocryptfs GPG signature
+  command: gpg --dearmor gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc
+  args:
+    chdir: /tmp
+    creates: gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc.gpg
+  when: not gocryptfs_bin.stat.exists
+- name: Verify gocryptfs signature
+  command: gpg --dry-run --no-default-keyring --keyring /tmp/gocryptfs-signing-key.pub.gpg --homedir ./ --verify gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc.gpg gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+  args:
+    chdir: /tmp
+  when: not gocryptfs_bin.stat.exists
+- name: Create gocryptfs directory
+  file:
+    path: /opt/gocryptfs-{{ gocryptfs_version }}
+    state: directory
+- name: Unarchive gocryptfs
+  unarchive:
+    src: /tmp/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+    dest: /opt/gocryptfs-{{ gocryptfs_version }}
+    remote_src: yes
+  when: not gocryptfs_bin.stat.exists
+- name: Symlink default gocryptfs
+  file:
+    src: "gocryptfs-{{ gocryptfs_version }}"
+    dest: "/opt/gocryptfs"
+    state: link
+- name: Symlink gocryptfs bin
+  file:
+    src: "/opt/gocryptfs/gocryptfs"
+    dest: "/usr/local/bin/gocryptfs"
+    state: link

@@ -10,6 +10,8 @@
       tags: git
     - role: baztian.keepass
       tags: keepass
+    - role: baztian.gocryptfs
+      tags: gocryptfs
     - role: baztian.docker
       tags: docker
     - role: baztian.vscode
