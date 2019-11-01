@@ -1,0 +1,7 @@
+---
+- name: Install Java and associated packages
+  apt:
+    pkg:
+      - openjdk-8-jdk
+      - openjdk-8-source
+      - visualvm

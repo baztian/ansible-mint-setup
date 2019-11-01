@@ -14,6 +14,8 @@
       tags: gocryptfs
     - role: baztian.docker
       tags: docker
+    - role: baztian.java
+      tags: java
     - role: baztian.vscode
       tags: vscode
     - role: baztian.jetbrains_toolbox
