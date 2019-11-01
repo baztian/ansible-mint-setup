@@ -18,6 +18,11 @@
   apt:
     pkg: insomnia
   tags: insomnia
+- name: Create launcher directory
+  file:
+    path: /usr/local/share/applications
+    state: directory
+  tags: postman,insomnia
 - name: Add fixed launcher for Insomnia
   copy:
     src: insomnia.desktop
@@ -148,11 +153,6 @@
     src: "Postman-{{ postman_version }}"
     dest: "/opt/Postman"
     state: link
-  tags: postman
-- name: Create launcher directory
-  file:
-    path: /usr/local/share/applications
-    state: directory
   tags: postman
 - name: Copy Postman App desktop launcher
   template:
