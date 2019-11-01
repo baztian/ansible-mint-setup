@@ -24,6 +24,8 @@
       tags: js
     - role: baztian.dev_tools
       tags: dev_tools
+    - role: baztian.aws
+      tags: aws
     - role: baztian.other_apt_installs
       tags: other_apt_installs
     - role: baztian.calibre

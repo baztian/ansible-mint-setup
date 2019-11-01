@@ -1,0 +1,8 @@
+---
+- name: Install awscli
+  include_role:
+    name: baztian.pip_venv
+  vars:
+      pkg: awscli
+      version: 1.16.272
+      bin: aws
