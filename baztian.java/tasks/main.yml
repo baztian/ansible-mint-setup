@@ -5,3 +5,29 @@
       - openjdk-8-jdk
       - openjdk-8-source
       - visualvm
+- name: Check if Maven 3 already installed
+  stat:
+    path: /opt/apache-maven-{{ maven3_version }}/bin/mvn
+  register: mvn3_bin
+- name: Download Maven 3
+  get_url:
+    url: http://archive.apache.org/dist/maven/maven-3/{{ maven3_version }}/binaries/apache-maven-{{ maven3_version }}-bin.tar.gz
+    checksum: "sha512:{{ maven3_sha512 }}"
+    dest: /tmp
+  when: not mvn3_bin.stat.exists
+- name: Unarchive Maven 3
+  unarchive:
+    src: /tmp/apache-maven-{{ maven3_version }}-bin.tar.gz
+    dest: /opt
+    remote_src: yes
+  when: not mvn3_bin.stat.exists
+- name: Symlink default mvn
+  file:
+    src: "apache-maven-{{ maven3_version }}"
+    dest: "/opt/maven"
+    state: link
+- name: Symlink mvn bin
+  file:
+    src: "/opt/maven/bin/mvn"
+    dest: "/usr/local/bin/mvn"
+    state: link
