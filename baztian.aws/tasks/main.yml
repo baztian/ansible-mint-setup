@@ -6,3 +6,7 @@
       pkg: awscli
       version: 1.16.272
       bin: aws
+- name: Setup awscli bash completion
+  copy:
+    content: 'complete -C "/opt/awscli/bin/aws_completer" aws'
+    dest: "/etc/bash_completion.d/aws_completer"
