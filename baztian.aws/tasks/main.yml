@@ -10,3 +10,11 @@
   copy:
     content: 'complete -C "/opt/awscli/bin/aws_completer" aws'
     dest: "/etc/bash_completion.d/aws_completer"
+- name: Download session-manager-plugin {{ awscli_session_manager_plugin_version }}
+  get_url:
+    url: https://s3.amazonaws.com/session-manager-downloads/plugin/{{ awscli_session_manager_plugin_version }}/ubuntu_64bit/session-manager-plugin.deb
+    checksum: "sha256:{{ awscli_session_manager_plugin_sha256 }}"
+    dest: /tmp/session-manager-plugin.deb
+- name: Install session-manager-plugin {{ awscli_session_manager_plugin_version }}
+  apt:
+    deb: /tmp/session-manager-plugin.deb
