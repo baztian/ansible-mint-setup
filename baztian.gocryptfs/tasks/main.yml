@@ -8,8 +8,8 @@
     url: "{{ item }}"
     dest: /tmp/
   with_items:
-    - https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
-    - https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc
+    - https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/{{ gocryptfs_tar }}
+    - https://github.com/rfjakob/gocryptfs/releases/download/v{{ gocryptfs_version }}/{{ gocryptfs_tar }}.asc
   when: not gocryptfs_bin.stat.exists
 - name: Copy gocryptfs GPG signing key
   copy:
@@ -17,20 +17,20 @@
       dest: /tmp/
   when: not gocryptfs_bin.stat.exists
 - name: Deamor gocryptfs GPG signing key
-  # https://stackoverflow.com/questions/46072548/verify-a-file-against-asc-using-gpg-without-importing-keys-file/55890428#55890428
+  # https://stackoverflow.com/a/55890428/1960601
   command: gpg --dearmor gocryptfs-signing-key.pub
   args:
     chdir: /tmp
     creates: gocryptfs-signing-key.pub.gpg
   when: not gocryptfs_bin.stat.exists
 - name: Deamor gocryptfs GPG signature
-  command: gpg --dearmor gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc
+  command: gpg --dearmor {{ gocryptfs_tar }}.asc
   args:
     chdir: /tmp
-    creates: gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc.gpg
+    creates: "{{ gocryptfs_tar }}.asc.gpg"
   when: not gocryptfs_bin.stat.exists
 - name: Verify gocryptfs signature
-  command: gpg --dry-run --no-default-keyring --keyring /tmp/gocryptfs-signing-key.pub.gpg --homedir ./ --verify gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz.asc.gpg gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+  command: gpg --dry-run --no-default-keyring --keyring gocryptfs-signing-key.pub.gpg --homedir . --verify {{ gocryptfs_tar }}.asc.gpg {{ gocryptfs_tar }}
   args:
     chdir: /tmp
   when: not gocryptfs_bin.stat.exists
@@ -40,7 +40,7 @@
     state: directory
 - name: Unarchive gocryptfs
   unarchive:
-    src: /tmp/gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
+    src: /tmp/{{ gocryptfs_tar }}
     dest: /opt/gocryptfs-{{ gocryptfs_version }}
     remote_src: yes
   when: not gocryptfs_bin.stat.exists
