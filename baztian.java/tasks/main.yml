@@ -31,3 +31,42 @@
     src: "/opt/maven/bin/mvn"
     dest: "/usr/local/bin/mvn"
     state: link
+- name: Check if Payara {{ payara_version }} already installed
+  stat:
+    path: /opt/payara-{{ payara_version }}/bin/asadmin
+  register: payara_bin
+  tags: payara
+- name: Download Payara {{ payara_version }}
+  get_url:
+    url: https://s3-eu-west-1.amazonaws.com/payara.fish/Payara+Downloads/{{ payara_version }}/payara-{{ payara_version }}.tar.gz
+    checksum: "sha256:{{ payara_sha256 }}"
+    dest: /tmp/payara-{{ payara_version }}.tar.gz
+  when: not payara_bin.stat.exists
+  tags: payara
+- name: Create Payara {{ payara_version }} directory
+  file:
+    path: /opt/payara-{{ payara_version }}
+    state: directory
+  tags: payara
+- name: Unarchive Payara {{ payara_version }}
+  unarchive:
+    src: /tmp/payara-{{ payara_version }}.tar.gz
+    extra_opts:
+      - "--strip-components=1"
+    dest: /opt/payara-{{ payara_version }}
+    remote_src: yes
+  when: not payara_bin.stat.exists
+  tags: payara
+- name: Symlink default Payara
+  file:
+    src: "payara-{{ payara_version }}"
+    dest: "/opt/payara"
+    state: link
+  tags: payara
+- name: Add asadmin alias
+  lineinfile:
+    path: ~/.bashrc
+    regexp: '^alias asadmin='
+    line: alias asadmin='/opt/payara/bin/asadmin'
+  become: no
+  tags: payara
