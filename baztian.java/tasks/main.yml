@@ -24,11 +24,11 @@
 - name: Symlink default mvn
   file:
     src: "apache-maven-{{ maven3_version }}"
-    dest: "/opt/maven"
+    dest: "/opt/apache-maven"
     state: link
 - name: Symlink mvn bin
   file:
-    src: "/opt/maven/bin/mvn"
+    src: "/opt/apache-maven/bin/mvn"
     dest: "/usr/local/bin/mvn"
     state: link
 - name: Check if Payara {{ payara_version }} already installed
