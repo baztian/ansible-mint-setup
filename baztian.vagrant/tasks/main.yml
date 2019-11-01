@@ -1,0 +1,13 @@
+---
+- name: Install Vagrant and dependencies
+  apt:
+    name:
+    - vagrant
+    - virtualbox
+    - virtualbox-guest-additions-iso
+    install_recommends: yes
+- name: Allow running virtualbox without sudo
+  user:
+    name: "{{ ansible_env.SUDO_USER }}"
+    groups: vboxusers
+    append: yes

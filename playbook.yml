@@ -26,3 +26,5 @@
       tags: dev_tools
     - role: baztian.other_apt_installs
       tags: other_apt_installs
+    - role: baztian.vagrant
+      tags: vagrant
