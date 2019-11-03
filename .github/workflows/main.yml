@@ -16,4 +16,4 @@ jobs:
     - name: Execute ansible playbook
       run: |
         ansible-playbook playbook.yml -i local \
-          --skip-tags apt_upgrade,terraform,xfce
+          --skip-tags no_github,apt_upgrade,xfce

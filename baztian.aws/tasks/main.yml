@@ -84,4 +84,4 @@
     src: /opt/terraform/terraform
     dest: /usr/local/bin/terraform
     state: link
-  tags: terraform
+  tags: terraform,no_github
