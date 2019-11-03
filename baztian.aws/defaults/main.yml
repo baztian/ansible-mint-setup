@@ -1,0 +1,8 @@
+---
+# https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html#plugin-version-history
+awscli_session_manager_plugin_version: 1.1.33.0
+awscli_session_manager_plugin_sha256: 67b5dc9a59d4123fd24bd6895dbbd827e3d6c72e5794dcd881ce6dd5d6a2fb22
+aws_vault_version: 4.7.1
+aws_vault_sha256: 8de95adf6e3b185210df3f06ccbe57399721d0171032782ce428c86b23b8792c
+terraform_version: 0.12.13
+terraform_sha256: 63f765a3f83987b67b046a9c31acff1ec9ee618990d0eab4db34eca6c0d861ec

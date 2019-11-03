@@ -1,0 +1,87 @@
+---
+- name: Install awscli
+  include_role:
+    name: baztian.pip_venv
+  vars:
+      pkg: awscli
+      version: 1.16.272
+      bin: aws
+- name: Setup awscli bash completion
+  copy:
+    content: 'complete -C "/opt/awscli/bin/aws_completer" aws'
+    dest: "/etc/bash_completion.d/aws_completer"
+- name: Download session-manager-plugin {{ awscli_session_manager_plugin_version }}
+  get_url:
+    url: https://s3.amazonaws.com/session-manager-downloads/plugin/{{ awscli_session_manager_plugin_version }}/ubuntu_64bit/session-manager-plugin.deb
+    checksum: "sha256:{{ awscli_session_manager_plugin_sha256 }}"
+    dest: /tmp/session-manager-plugin.deb
+- name: Install session-manager-plugin {{ awscli_session_manager_plugin_version }}
+  apt:
+    deb: /tmp/session-manager-plugin.deb
+- name: Check if aws-vault {{ aws_vault_version }} already installed
+  stat:
+    path: /opt/aws-vault-{{ aws_vault_version }}/aws-vault
+  register: aws_vault_directory
+  tags: aws_vault
+- name: Create aws-vault {{ aws_vault_version }} directory
+  file:
+    path: /opt/aws-vault-{{ aws_vault_version }}
+    state: directory
+  tags: aws_vault
+- name: Download aws_vault {{ aws_vault_version }}
+  get_url:
+    url: https://github.com/99designs/aws-vault/releases/download/v{{ aws_vault_version }}/aws-vault-linux-amd64
+    checksum: sha256:{{ aws_vault_sha256 }}
+    dest: /opt/aws-vault-{{ aws_vault_version }}/aws-vault
+    mode: "755"
+  when: not aws_vault_directory.stat.exists
+  tags: aws_vault
+- name: Symlink default aws-vault version to aws-vault {{ aws_vault_version }}
+  file:
+    src: aws-vault-{{ aws_vault_version }}
+    dest: /opt/aws-vault
+    state: link
+  tags: aws_vault
+- name: Symlink aws-vault binary
+  file:
+    src: "/opt/aws-vault/aws-vault"
+    dest: "/usr/local/bin/aws-vault"
+    state: link
+  tags: aws_vault
+- name: Check if terraform {{ terraform_version }} already installed
+  stat:
+    path: /opt/terraform-{{ terraform_version }}/terraform
+  register: terraform_directory
+  tags: terraform
+- name: Download terraform {{ terraform_version }}
+  get_url:
+    url: https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip
+    checksum: sha256:{{ terraform_sha256 }}
+    dest: /tmp/terraform-{{ terraform_version }}.zip
+    mode: "755"
+  when: not terraform_directory.stat.exists
+  tags: terraform
+- name: Create terraform {{ terraform_version }} directory
+  file:
+    path: /opt/terraform-{{ terraform_version }}
+    state: directory
+  tags: terraform
+- name: Unarchive terraform {{ terraform_version }}
+  unarchive:
+    src: /tmp/terraform-{{ terraform_version }}.zip
+    dest: /opt/terraform-{{ terraform_version }}
+    remote_src: yes
+  when: not terraform_directory.stat.exists
+  tags: terraform
+- name: Symlink default terraform version to terraform {{ terraform_version }}
+  file:
+    src: terraform-{{ terraform_version }}
+    dest: /opt/terraform
+    state: link
+  tags: terraform
+- name: Symlink terraform binary
+  file:
+    src: /opt/terraform/terraform
+    dest: /usr/local/bin/terraform
+    state: link
+  tags: terraform,no_github
