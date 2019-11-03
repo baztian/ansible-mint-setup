@@ -48,3 +48,40 @@
     dest: "/usr/local/bin/aws-vault"
     state: link
   tags: aws_vault
+- name: Check if terraform {{ terraform_version }} already installed
+  stat:
+    path: /opt/terraform-{{ terraform_version }}/terraform
+  register: terraform_directory
+  tags: terraform
+- name: Download terraform {{ terraform_version }}
+  get_url:
+    url: https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip
+    checksum: sha256:{{ terraform_sha256 }}
+    dest: /tmp/terraform-{{ terraform_version }}.zip
+    mode: "755"
+  when: not terraform_directory.stat.exists
+  tags: terraform
+- name: Create terraform {{ terraform_version }} directory
+  file:
+    path: /opt/terraform-{{ terraform_version }}
+    state: directory
+  tags: terraform
+- name: Unarchive terraform {{ terraform_version }}
+  unarchive:
+    src: /tmp/terraform-{{ terraform_version }}.zip
+    dest: /opt/terraform-{{ terraform_version }}
+    remote_src: yes
+  when: not terraform_directory.stat.exists
+  tags: terraform
+- name: Symlink default terraform version to terraform {{ terraform_version }}
+  file:
+    src: terraform-{{ terraform_version }}
+    dest: /opt/terraform
+    state: link
+  tags: terraform
+- name: Symlink terraform binary
+  file:
+    src: /opt/terraform/terraform
+    dest: /usr/local/bin/terraform
+    state: link
+  tags: terraform
