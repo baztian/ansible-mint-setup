@@ -1,0 +1,26 @@
+---
+- name: Determine whether Emacs 25 PPA required
+  set_fact:
+    ppa_required: "{{ ansible_distribution == 'Debian' and ansible_distribution_release == 'stretch'
+     or ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+     or ansible_distribution == 'Linux Mint' and ansible_distribution_major_version == '18' }}"
+- name: Add PPA Key from Kevin Kelley
+  apt_key:
+    id: 873503A090750CDAEB0754D93FF0E01EEAAFC9CD
+    keyserver: keyserver.ubuntu.com
+  when: ppa_required
+- name: Extract distribution base name (works on linux mint as well)
+  command: grep -oP 'UBUNTU_CODENAME=\K.*' /etc/os-release
+  register: distro
+  changed_when: False
+- name: Add Kevin Kelley's Emacs PPA (deb)
+  apt_repository:
+    repo: deb http://ppa.launchpad.net/kelleyk/emacs/ubuntu {{ distro.stdout }} main
+  when: ppa_required
+- name: Add Kevin Kelley's Emacs PPA (deb-src)
+  apt_repository:
+    repo: deb-src http://ppa.launchpad.net/kelleyk/emacs/ubuntu {{ distro.stdout }} main
+  when: ppa_required
+- name: Install Emacs 25
+  apt:
+    name: emacs25
