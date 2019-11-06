@@ -23,4 +23,6 @@
   when: ppa_required
 - name: Install Emacs 25
   apt:
-    name: emacs25
+    name:
+    - emacs25
+    - emacs25-el
