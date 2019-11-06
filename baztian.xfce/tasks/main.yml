@@ -54,8 +54,10 @@
     get_url:
       url: '{{ xfce_terminal.terminalrc_url }}'
       dest: ~/.config/xfce4/terminal/terminalrc
+      force: yes
   - name: Import Xfce terminal terminalrc configuration
     get_url:
       url: '{{ xfce_terminal.accels_scm_url }}'
       dest: ~/.config/xfce4/terminal/accels.scm
+      force: yes
   become: no
