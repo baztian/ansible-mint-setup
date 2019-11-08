@@ -1,9 +1,12 @@
 ---
+# todo: move to baztian.docker
+- name: Make sure required python-docker package is installed
+  apt:
+      name: python-docker
 - name: Pull eac docker image {{ eac_image }}
   docker_image:
     name: "{{ eac_image }}"
     source: pull
-#docker run --rm --entrypoint /bin/sh baztian/wine-eac -c '(cd ${USER_PATH}/.local/share; tar c icons/hicolor/*/apps/*_EAC.0.png)'|tar tv
 - name: Extract desktop icons from image {{ eac_image }}
   docker_container:
     name: wine-eac-desktop-icon-extraction
