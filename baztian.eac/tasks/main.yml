@@ -3,6 +3,7 @@
   docker_image:
     name: "{{ eac_image }}"
     source: pull
+    force_source: "{{ eac_force_pull_image }}"
 - name: Extract desktop icons from image {{ eac_image }}
   docker_container:
     name: wine-eac-desktop-icon-extraction
