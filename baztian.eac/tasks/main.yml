@@ -1,8 +1,4 @@
 ---
-# todo: move to baztian.docker
-- name: Make sure required python-docker package is installed
-  apt:
-      name: python-docker
 - name: Pull eac docker image {{ eac_image }}
   docker_image:
     name: "{{ eac_image }}"
@@ -28,6 +24,16 @@
   unarchive:
     src: /tmp/eac-icons.tar
     dest: /usr/local/share/
+- name: Create user config directory
+  file:
+    path: ~/.config/exact-audio-copy
+    state: directory
+  become: no
+- name: Create default user config
+  template:
+    src: config.j2
+    dest: ~/.config/exact-audio-copy/config
+  become: no
 - name: Add wrapper script for Exact Audio Copy
   copy:
     src: exact-audio-copy
