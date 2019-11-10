@@ -1,0 +1,57 @@
+---
+- name: Check if Jython installed
+  stat:
+    path: "{{ jython_install_dir }}/jython-{{ jython_version }}"
+  register: jython_directory
+- name: create download directory
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ jython_download_dir }}'
+  when: not jython_directory.stat.exists
+- name: Download Jython
+  maven_artifact:
+    group_id: org.python
+    artifact_id: jython-installer
+    version: "{{ jython_version }}"
+    dest: "{{ jython_download_dir }}/jython-installer-{{ jython_version }}.jar"
+  when: not jython_directory.stat.exists
+- name: Install Jython
+  become: true
+  command: /usr/bin/java -jar "{{ jython_download_dir }}/jython-installer-{{ jython_version }}.jar" -s -d "{{ jython_install_dir }}/jython-{{ jython_version }}" creates="{{ jython_install_dir }}/jython-{{ jython_version }}"
+  when: not jython_directory.stat.exists
+- name: Cleanup Jython download
+  file:
+    state: absent
+    path:  "{{ jython_download_dir }}/jython-installer-{{ jython_version }}.jar"
+- name: Symlink default Jython
+  become: true
+  file:
+    src: "jython-{{ jython_version }}"
+    dest: "{{ jython_install_dir }}/jython"
+    state: link
+    force: true
+- name: Symlink Jython bin
+  become: true
+  file:
+    src: "{{ jython_install_dir }}/jython/bin/jython"
+    dest: "{{ jython_bin_dir }}/jython"
+    state: link
+    force: true
+- name: Symlink (j)virtualenv bin
+  become: true
+  file:
+    src: "{{ jython_install_dir }}/jython/bin/virtualenv"
+    dest: "{{ jython_bin_dir }}/jvirtualenv"
+    state: link
+    force: true
+- name: Check if virtualenv for Jython installed
+  stat:
+    path: "{{ jython_install_dir }}/jython-{{ jython_version }}/bin/virtualenv"
+  register: jython_virtualenv_path
+- name: Install Jython virtualenv package
+  become: true
+  pip:
+    name: virtualenv
+    executable: "{{ jython_install_dir }}/jython/bin/pip"
+  when: not jython_virtualenv_path.stat.exists
