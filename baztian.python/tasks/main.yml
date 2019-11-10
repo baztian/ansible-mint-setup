@@ -1,0 +1,8 @@
+---
+- name: Install Python and associated packages
+  apt:
+    pkg:
+      - python2.7
+      - python3
+      - python-lxml
+      - python3-lxml
