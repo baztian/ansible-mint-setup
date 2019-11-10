@@ -1,0 +1,17 @@
+galaxy_info:
+  author: baztian
+  description: Role for setting up Exact Audio Copy via wine inside docker container
+  license: GPLv3
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  galaxy_tags:
+    - multimedia
+    - eac
+    - exactaudiocopy
+    - rip
+    - cd
+dependencies:
+    - baztian.docker

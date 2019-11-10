@@ -28,6 +28,7 @@
     - docker-ce
     - docker-ce-cli
     - containerd.io
+    - python-docker # required by ansible docker modules
 - name: Create docker group
   group:
     name: docker

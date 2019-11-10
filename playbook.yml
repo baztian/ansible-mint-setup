@@ -34,3 +34,5 @@
       tags: calibre
     - role: baztian.vagrant
       tags: vagrant
+    - role: baztian.eac
+      tags: eac

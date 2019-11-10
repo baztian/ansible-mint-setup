@@ -1,0 +1,46 @@
+---
+- name: Pull eac docker image {{ eac_image }}
+  docker_image:
+    name: "{{ eac_image }}"
+    source: pull
+    force_source: "{{ eac_force_pull_image }}"
+- name: Extract desktop icons from image {{ eac_image }}
+  docker_container:
+    name: wine-eac-desktop-icon-extraction
+    image: "{{ eac_image }}"
+    read_only: yes
+    entrypoint: /bin/sh
+    tty: yes
+    command:
+      '-c ''(cd ${USER_PATH}/.local/share; tar -c --transform "s|\(.*/\).*_EAC.0|\1exact-audio-copy|" icons/hicolor/*/apps/*_EAC.0.png) > /tmp/eac-icons.tar'''
+    volumes:
+      - /tmp:/tmp
+    cleanup: yes
+  changed_when: False
+- name: Create launcher directory
+  file:
+    path: /usr/local/share/applications
+    state: directory
+- name: Install icons
+  unarchive:
+    src: /tmp/eac-icons.tar
+    dest: /usr/local/share/
+- name: Create user config directory
+  file:
+    path: ~/.config/exact-audio-copy
+    state: directory
+  become: no
+- name: Create default user config
+  template:
+    src: config.j2
+    dest: ~/.config/exact-audio-copy/config
+  become: no
+- name: Add wrapper script for Exact Audio Copy
+  copy:
+    src: exact-audio-copy
+    dest: /usr/local/bin/
+    mode: "755"
+- name: Add launcher for Exact Audio Copy
+  copy:
+    src: eac.desktop
+    dest: /usr/local/share/applications/

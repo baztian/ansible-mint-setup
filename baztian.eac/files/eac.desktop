@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Exact Audio Copy
+Exec=exact-audio-copy
+Terminal=false
+Type=Application
+Icon=exact-audio-copy
+StartupWMClass=eac.exe
+Comment=Audio grabber for audio CDs
+Categories=Multimedia;
