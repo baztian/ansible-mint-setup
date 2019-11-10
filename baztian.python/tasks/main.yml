@@ -28,3 +28,15 @@
   vars:
       pkg: pipenv
       version: 2018.11.26
+- name: Install pipenv
+  include_role:
+    name: baztian.pip_venv
+  vars:
+      pkg: pipenv
+      version: 2018.11.26
+- name: Install tox
+  include_role:
+    name: baztian.pip_venv
+  vars:
+      pkg: tox
+      version: 3.14.0
