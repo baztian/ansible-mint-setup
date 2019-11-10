@@ -1,8 +1,23 @@
 ---
+- name: Add PPA Key for deadsnakes
+  apt_key:
+    id: F23C5A6CF475977595C89F51BA6932366A755776
+    keyserver: keyserver.ubuntu.com
+- name: Extract distribution base name (works on linux mint as well)
+  command: grep -oP 'UBUNTU_CODENAME=\K.*' /etc/os-release
+  register: distro
+  changed_when: False
+- name: Add deadsnakes PPA (deb)
+  apt_repository:
+    repo: deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu {{ distro.stdout }} main
+- name: Add deadsnakes PPA (deb-src)
+  apt_repository:
+    repo: deb-src http://ppa.launchpad.net/deadsnakes/ppa/ubuntu {{ distro.stdout }} main
 - name: Install Python and associated packages
   apt:
     pkg:
       - python2.7
       - python3
+      - python3.6
       - python-lxml
       - python3-lxml
