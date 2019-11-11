@@ -8,6 +8,8 @@
       tags: xfce
     - role: baztian.git
       tags: git
+    - role: baztian.python
+      tags: python
     - role: baztian.emacs
       tags: emacs
     - role: baztian.keepass
