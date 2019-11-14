@@ -159,3 +159,13 @@
     src: templates/postman.desktop.j2
     dest: /usr/local/share/applications/postman.desktop
   tags: postman
+- name: Download ripgrep {{ ripgrep_version }}
+  get_url:
+    url: https://github.com/BurntSushi/ripgrep/releases/download/{{ ripgrep_version }}/ripgrep_{{ ripgrep_version }}_amd64.deb
+    checksum: "sha1:{{ ripgrep_sha1 }}"
+    dest: /tmp/ripgrep_{{ ripgrep_version }}_amd64.deb
+  tags: ripgrep
+- name: Install ripgrep {{ ripgrep_version }}
+  apt:
+    deb: /tmp/ripgrep_{{ ripgrep_version }}_amd64.deb
+  tags: ripgrep
