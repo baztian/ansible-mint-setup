@@ -59,3 +59,9 @@
         . /opt/hub/etc/hub.bash_completion.sh
       fi
   become: no
+- name: Install get_repos.sh
+  get_url:
+    url: '{{ get_repos_url }}'
+    dest: /usr/local/bin/get_repos.sh
+    mode: "755"
+    force: yes
