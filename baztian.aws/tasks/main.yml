@@ -85,3 +85,18 @@
     dest: /usr/local/bin/terraform
     state: link
   tags: terraform,no_github
+- name: Determine whether python 3.6 for aws-sam-cli required specifically
+  set_fact:
+    py_version: "{{ '3.6' if ( ansible_distribution == 'Debian' and ansible_distribution_release == 'stretch'
+     or ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+     or ansible_distribution == 'Linux Mint' and ansible_distribution_major_version == '18' ) else '3' }}"
+  tags: aws_sam_cli
+- name: Install aws-sam-cli
+  include_role:
+    name: baztian.pip_venv
+  vars:
+      pkg: aws-sam-cli
+      version: 0.37.0
+      py_version: 3.6
+      bin: sam
+  tags: aws_sam_cli
