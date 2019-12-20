@@ -11,7 +11,7 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: servers
     - vars:
       roles:
-         - role: baztian.apt_upgrade
+         - role: baztian.xfce
 
 License
 -------

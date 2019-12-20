@@ -1,6 +1,7 @@
 ---
 various_apt_packages:
 - htop
+- ttf-mscorefonts-installer
 - remmina
 - remmina-plugin-rdp
 - remmina-plugin-vnc
