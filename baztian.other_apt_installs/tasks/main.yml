@@ -7,21 +7,23 @@
   apt:
     deb: "{{ zoom_deb_url }}"
   tags: zoom_us
-- name: Gather installed packages
-  package_facts:
+- name: Add Microsoft apt signing key on remote server to keyring
+  apt_key:
+    id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+    keyserver: keyserver.ubuntu.com
   tags: ms_teams
-- name: Download Microsoft Teams client
-  get_url:
-    url: "https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v{{ ms_teams_version }}/teams-for-linux_{{ ms_teams_version }}_amd64.deb"
-    checksum: "sha1:{{ ms_teams_sha1 }}"
-    dest: "/tmp/teams-for-linux_{{ ms_teams_version }}_amd64.deb"
+- name: Add apt repo for ms teams
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main
+    # setting filename required to not collide with the one provided by the deb similar to
+    # https://github.com/microsoft/vscode/blob/master/resources/linux/debian/postinst.template
+    filename: teams
+    state: present
   tags: ms_teams
-  when: ansible_facts.packages['teams-for-linux']|default('undefined') != ms_teams_version
 - name: Install Microsoft Teams client
   apt:
-    deb: "/tmp/teams-for-linux_{{ ms_teams_version }}_amd64.deb"
+    pkg: teams
   tags: ms_teams
-  when: ansible_facts.packages['teams-for-linux']|default('undefined') != ms_teams_version
 - name: Add Spotify signing key on remote server to keyring
   apt_key:
     data: "{{ lookup('file', 'spotify.gpg') }}"
