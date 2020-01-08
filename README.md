@@ -6,22 +6,26 @@ Ansible playbook whose aim is to save time setting up my Linux Mint XFCE machine
 
 Setup ansible on the *host* (not VM guest).
 
-    sudo apt update
-    sudo apt install -y python3-venv
-    python3 -m venv ~/Software/ansible
-    . ~/Software/ansible/bin/activate
+    sudo -s
+    apt update
+    apt install -y python3-venv libssl-dev python3-dev
+    python3 -m venv /opt/ansible-2.8.5
+    . /opt/ansible-2.8.5/bin/activate
     pip install wheel
-    sudo apt install -y libssl-dev python3-dev
     pip install ansible==2.8.5
     deactivate
-    mkdir -p ~/bin
-    for i in ~/Software/ansible/bin/ansible* ; do ln -sf $i ~/bin/ ; done
+    ln -sf /opt/ansible-2.8.5/bin/ansible-playbook /usr/local/bin/
+    exit
 
 ## Usage
 
 Install on local machine.
 
     ansible-playbook playbook.yml -i local -K
+
+Install but skip some steps.
+
+    ansible-playbook playbook.yml -i local -K --skip-tags xfce,calibre,eac,spotify
 
 ## Manual steps while running the Linux Mint installer
 
