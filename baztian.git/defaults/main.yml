@@ -26,4 +26,4 @@ git_config:
   mergetool.prompt: "false"
 bash_git_prompt_version: 9733b12b3441424ad47d4f42977578e8c9d89438
 hub_version: 2.12.8
-get_repos_url: https://gist.githubusercontent.com/xalvarez/eb57f02c401a264f2ca40ffebcb145e9/raw/768ea285cd2f3af532a709366595e32872f4047c/get_repos.sh
+get_repos_url: https://gist.githubusercontent.com/xalvarez/eb57f02c401a264f2ca40ffebcb145e9/raw/get_repos.sh

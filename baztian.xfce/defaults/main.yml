@@ -62,5 +62,5 @@ xfce_shortcuts_remove:
 - <Alt>Insert # Add workspace
 - <Alt>Delete # Delete last workspace
 xfce_terminal:
-  terminalrc_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/34646dc3ffe9e61f8e6b21dc6d9eca26c6c253b6/terminalrc
-  accels_scm_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/34646dc3ffe9e61f8e6b21dc6d9eca26c6c253b6/accels.scm
+  terminalrc_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/terminalrc
+  accels_scm_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/accels.scm
