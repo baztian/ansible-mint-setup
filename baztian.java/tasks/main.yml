@@ -5,6 +5,45 @@
       - openjdk-8-jdk
       - openjdk-8-source
       - visualvm
+- name: Check if JDK-11 already installed
+  stat:
+    path: /opt/jdk11-{{ jdk11_version }}
+  register: jdk11_directory
+  tags: jdk11
+- name: Download JDK-11
+  get_url:
+    url: "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-{{ jdk11_version | replace('_', '%2B') }}/\
+      OpenJDK11U-jdk_x64_linux_hotspot_{{ jdk11_version }}.tar.gz"
+    checksum: "sha256:{{ jdk11_sha256 }}"
+    dest: "/tmp/jdk11-{{ jdk11_version }}.tar.gz"
+  tags: jdk11
+  when: not jdk11_directory.stat.exists
+- name: Create jdk11 directory
+  file:
+    path: "/opt/jdk11-{{ jdk11_version }}"
+    state: directory
+  tags: jdk11
+- name: Install jdk11
+  unarchive:
+    src: "/tmp/jdk11-{{ jdk11_version }}.tar.gz"
+    extra_opts:
+      - "--strip-components=1"
+    dest: "/opt/jdk11-{{ jdk11_version }}"
+    remote_src: yes
+  tags: jdk11
+  when: not jdk11_directory.stat.exists
+- name: Symlink default jdk11
+  file:
+    src: "jdk11-{{ jdk11_version }}"
+    dest: "/opt/jdk11"
+    state: link
+  tags: jdk11
+- name: Symlink jdk11 bin
+  file:
+    src: "/opt/jdk11/bin/java"
+    dest: "/usr/local/bin/java-11"
+    state: link
+  tags: jdk11
 - name: Check if Maven 3 already installed
   stat:
     path: /opt/apache-maven-{{ maven3_version }}/bin/mvn
