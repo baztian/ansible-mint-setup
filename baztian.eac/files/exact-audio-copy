@@ -20,4 +20,4 @@ if [ ! -d "${DATA_DIR}/" ]
 then
     echo Data dir "$DATA_DIR" not a directory. > /dev/stderr
 fi
-docker run -v $HOME/.config/exact-audio-copy/:/wine/userdata/ -v $DATA_DIR:/Data --rm --privileged --cap-drop ALL --device /dev/sg0 --device /dev/sg1 -v /tmp/.X11-unix/:/tmp/.X11-unix/ -e DISPLAY=${DISPLAY} --name wine-eac baztian/wine-eac
+docker run -e LANG=C.UTF-8 -e LC_ALL=C.UTF-8 -v $HOME/.config/exact-audio-copy/:/wine/userdata/ -v $DATA_DIR:/Data --rm --privileged --cap-drop ALL --device /dev/sg0 --device /dev/sg1 -v /tmp/.X11-unix/:/tmp/.X11-unix/ -e DISPLAY=${DISPLAY} --name wine-eac baztian/wine-eac
