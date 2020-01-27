@@ -111,6 +111,17 @@
     dest: "/usr/local/bin/jid"
     state: link
   tags: jid
+- name: Install bumpversion / bump2version
+  include_role:
+    name: baztian.pip_venv
+    apply:
+      tags:
+        - bump2version
+  vars:
+      pkg: bump2version
+      version: 1.0.0
+      bin: bumpversion
+  tags: bump2version
 - name: Check if Postman App already installed
   stat:
     path: /opt/Postman-{{ postman_version }}
