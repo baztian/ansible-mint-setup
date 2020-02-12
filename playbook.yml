@@ -38,3 +38,5 @@
       tags: vagrant
     - role: baztian.eac
       tags: eac
+    - role: baztian.joplin
+      tags: joplin
