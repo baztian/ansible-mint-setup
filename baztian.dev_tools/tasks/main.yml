@@ -172,3 +172,14 @@
   apt:
     deb: /tmp/ripgrep_{{ ripgrep_version }}_amd64.deb
   tags: ripgrep
+- name: Install bump2version aka bumpversion
+  include_role:
+    name: baztian.pip_venv
+    apply:
+      tags:
+        - bump2version
+  vars:
+      pkg: bump2version
+      version: "{{ bump2version_version }}"
+      bin: bumpversion
+  tags: bump2version
