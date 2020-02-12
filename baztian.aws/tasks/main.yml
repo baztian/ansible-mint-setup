@@ -96,7 +96,7 @@
     name: baztian.pip_venv
   vars:
       pkg: aws-sam-cli
-      version: 0.37.0
+      version: "{{ aws_sam_cli_version }}"
       py_version: 3.6
       bin: sam
   tags: aws_sam_cli

@@ -6,3 +6,4 @@ aws_vault_version: 4.7.1
 aws_vault_sha256: 8de95adf6e3b185210df3f06ccbe57399721d0171032782ce428c86b23b8792c
 terraform_version: 0.12.13
 terraform_sha256: 63f765a3f83987b67b046a9c31acff1ec9ee618990d0eab4db34eca6c0d861ec
+aws_sam_cli_version: 0.37.0
