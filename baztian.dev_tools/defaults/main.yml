@@ -9,3 +9,4 @@ postman_version: 7.10.0
 postman_sha1: 0ea81d216c63d9847ee7bc6bedf65f4aa0cf3f66
 ripgrep_version: 11.0.2
 ripgrep_sha1: de1aa2176c242c5f60921286a47e58c09d2de64c
+bump2version_version: 0.5.11

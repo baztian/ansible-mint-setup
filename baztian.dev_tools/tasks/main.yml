@@ -180,6 +180,6 @@
         - bump2version
   vars:
       pkg: bump2version
-      version: 0.5.11
+      version: "{{ bump2version_version }}"
       bin: bumpversion
   tags: bump2version
