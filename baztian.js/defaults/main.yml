@@ -3,3 +3,5 @@ npm_config_prefix: /usr/local
 # See https://github.com/nodesource/distributions/blob/master/README.md#debinstall
 # for available major releases
 node_major_release: 10
+serverless_framework_version: 1.63.0
+browser_sync_version: 2.26.3

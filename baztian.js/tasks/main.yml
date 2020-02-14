@@ -37,6 +37,7 @@
   npm:
     name: serverless
     global: yes
+    version: "{{ serverless_framework_version }}"
   environment:
     npm_config_prefix: "{{ npm_config_prefix }}"
   tags: serverless-framework
@@ -44,6 +45,7 @@
   npm:
     name: browser-sync
     global: yes
+    version: "{{ browser_sync_version }}"
   environment:
     npm_config_prefix: "{{ npm_config_prefix }}"
   tags: browser-sync
