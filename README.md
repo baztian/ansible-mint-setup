@@ -19,6 +19,10 @@ Setup ansible on the *host* (not VM guest).
 
 ## Usage
 
+Install required roles first.
+
+    ansible-galaxy install -r requirements.yml
+
 Install on local machine.
 
     ansible-playbook playbook.yml -i local -K

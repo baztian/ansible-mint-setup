@@ -9,6 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    - name: Install required roles
+      run: ansible-galaxy install -r requirements.yml
     - name: Run ansible-lint
       uses: ansible/ansible-lint-action@master
       with:
