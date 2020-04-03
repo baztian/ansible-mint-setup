@@ -1,5 +1,7 @@
 # Ansible Mint setup
 
+![CI](https://github.com/baztian/ansible-mint-setup/workflows/CI/badge.svg)
+
 Ansible playbook whose aim is to save time setting up my Linux Mint XFCE machines.
 
 ## Ansible installation
@@ -18,6 +20,10 @@ Setup ansible on the *host* (not VM guest).
     exit
 
 ## Usage
+
+Install required roles first.
+
+    ansible-galaxy install -r requirements.yml
 
 Install on local machine.
 
