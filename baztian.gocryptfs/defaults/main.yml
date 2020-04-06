@@ -1,3 +1,0 @@
----
-gocryptfs_version: 1.4.3
-gocryptfs_tar: gocryptfs_v{{ gocryptfs_version }}_linux-static_amd64.tar.gz
