@@ -1,2 +1,0 @@
-#!/bin/sh
-/usr/bin/mono /usr/lib/keepass2/KPScript.exe "$@"
