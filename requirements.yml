@@ -6,3 +6,4 @@
 - src: baztian.calibre
 - src: baztian.joplin
 - src: baztian.gocryptfs
+- src: baztian.emacs
