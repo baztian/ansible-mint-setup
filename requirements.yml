@@ -2,3 +2,4 @@
 - src: baztian.pip_venv
 - src: baztian.dev_tools
 - src: baztian.java
+- src: baztian.keepass
