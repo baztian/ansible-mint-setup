@@ -8,3 +8,4 @@
 - src: baztian.gocryptfs
 - src: baztian.emacs
 - src: baztian.jetbrains_toolbox
+- src: baztian.js
