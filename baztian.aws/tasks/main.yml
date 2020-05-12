@@ -78,6 +78,13 @@
     dest: "/usr/local/bin/aws-vault"
     state: link
   tags: aws_vault
+- name: Set assume role TTL for aws-vault to 1 hour
+  lineinfile:
+    path: ~/.bashrc
+    regexp: '^export AWS_ASSUME_ROLE_TTL='
+    line: export AWS_ASSUME_ROLE_TTL=1h
+  become: no
+  tags: aws_vault
 - name: Check if saml2aws {{ saml2aws_version }} already installed
   stat:
     path: /opt/saml2aws-{{ saml2aws_version }}/saml2aws
