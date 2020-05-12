@@ -120,6 +120,13 @@
     dest: "/usr/local/bin/saml2aws"
     state: link
   tags: saml2aws
+- name: Set default aws profile for saml2aws
+  lineinfile:
+    path: ~/.bashrc
+    regexp: '^export AWS_DEFAULT_PROFILE='
+    line: export AWS_DEFAULT_PROFILE=saml
+  become: no
+  tags: saml2aws
 - name: Check if terraform {{ terraform_version }} already installed
   stat:
     path: /opt/terraform-{{ terraform_version }}/terraform
