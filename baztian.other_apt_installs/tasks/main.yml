@@ -24,6 +24,23 @@
   apt:
     pkg: teams
   tags: ms_teams
+- name: Add Signal apt signing key on remote server to keyring
+  apt_key:
+    id: DBA36B5181D0C816F630E889D980A17457F6FB06
+    keyserver: keyserver.ubuntu.com
+  tags: signal
+- name: Add apt repo for Signal
+  apt_repository:
+    repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+    # setting filename required to not collide with the one provided by the deb similar to
+    # https://github.com/microsoft/vscode/blob/master/resources/linux/debian/postinst.template
+    filename: signal-xenial
+    state: present
+  tags: signal
+- name: Install Signal client
+  apt:
+    pkg: signal-desktop
+  tags: signal
 - name: Add Spotify signing key on remote server to keyring
   apt_key:
     data: "{{ lookup('file', 'spotify.gpg') }}"
