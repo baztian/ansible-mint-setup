@@ -24,6 +24,23 @@
   apt:
     pkg: teams
   tags: ms_teams
+- name: Add Microsoft Skype apt signing key on remote server to keyring
+  apt_key:
+    id: D4040146BE3972509FD57FC71F3045A5DF7587C3
+    keyserver: keyserver.ubuntu.com
+  tags: skype
+- name: Add apt repo for Skype
+  apt_repository:
+    repo: deb [arch=amd64] https://repo.skype.com/deb stable main
+    # setting filename required to not collide with the one provided by the deb similar to
+    # https://github.com/microsoft/vscode/blob/master/resources/linux/debian/postinst.template
+    filename: skype-stable
+    state: present
+  tags: skype
+- name: Install Skype client
+  apt:
+    pkg: skypeforlinux
+  tags: skype
 - name: Add Signal apt signing key on remote server to keyring
   apt_key:
     id: DBA36B5181D0C816F630E889D980A17457F6FB06
