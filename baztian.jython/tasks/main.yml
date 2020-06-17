@@ -66,4 +66,7 @@
     set -o pipefail &&
     find "{{ jython_install_dir }}/jython-{{ jython_version }}/Lib" -name
     "*\$py.class" -print0 | xargs -0 chmod 644
+  # work around https://github.com/ansible/ansible-lint/issues/497
+  args:
+    executable: /bin/bash
   changed_when: False
