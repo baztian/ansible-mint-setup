@@ -34,7 +34,8 @@
   tags: teams_for_linux
 - name: Download unofficial Microsoft Teams for Linux client
   get_url:
-    url: "https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v{{ teams_for_linux_version }}/teams-for-linux_{{ teams_for_linux_version }}_amd64.deb"
+    url: "https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v{{
+       teams_for_linux_version }}/teams-for-linux_{{ teams_for_linux_version }}_amd64.deb"
     checksum: "sha1:{{ teams_for_linux_sha1 }}"
     dest: "/tmp/teams-for-linux_{{ teams_for_linux_version }}_amd64.deb"
   when: ansible_facts.packages['teams-for-linux']|default('undefined') != teams_for_linux_version
