@@ -20,6 +20,8 @@
       tags: docker
     - role: baztian.java
       tags: java
+    - role: baztian.jython
+      tags: jython
     - role: baztian.vscode
       tags: vscode
     - role: baztian.jetbrains_toolbox
