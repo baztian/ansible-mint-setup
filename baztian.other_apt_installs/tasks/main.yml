@@ -29,6 +29,21 @@
     id: D4040146BE3972509FD57FC71F3045A5DF7587C3
     keyserver: keyserver.ubuntu.com
   tags: skype
+- name: Gather installed packages
+  package_facts:
+  tags: teams_for_linux
+- name: Download unofficial Microsoft Teams for Linux client
+  get_url:
+    url: "https://github.com/IsmaelMartinez/teams-for-linux/releases/download/v{{ teams_for_linux_version }}/teams-for-linux_{{ teams_for_linux_version }}_amd64.deb"
+    checksum: "sha1:{{ teams_for_linux_sha1 }}"
+    dest: "/tmp/teams-for-linux_{{ teams_for_linux_version }}_amd64.deb"
+  when: ansible_facts.packages['teams-for-linux']|default('undefined') != teams_for_linux_version
+  tags: teams_for_linux
+- name: Install unofficial Microsoft Teams for Linux client
+  apt:
+    deb: "/tmp/teams-for-linux_{{ teams_for_linux_version }}_amd64.deb"
+  tags: teams_for_linux
+  when: ansible_facts.packages['teams-for-linux']|default('undefined') != teams_for_linux_version
 - name: Add apt repo for Skype
   apt_repository:
     repo: deb [arch=amd64] https://repo.skype.com/deb stable main
