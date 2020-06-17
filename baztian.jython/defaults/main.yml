@@ -1,6 +1,6 @@
 ---
 # Jython version number
-jython_version: "2.7.2b2"
+jython_version: "2.7.2"
 
 # Installation directory for the Jython-versionnumber distribution and the Jython symlink
 jython_install_dir: "/opt"
