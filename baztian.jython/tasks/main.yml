@@ -63,6 +63,7 @@
   # see https://bugs.jython.org/issue2862
   become: true
   shell: >
+    set -o pipefail &&
     find "{{ jython_install_dir }}/jython-{{ jython_version }}/Lib" -name
     "*\$py.class" -print0 | xargs -0 chmod 644
   changed_when: False
