@@ -1,5 +1,6 @@
 - src: baztian.asdf
 - src: baztian.vscode
+- src: baztian.python
 - src: baztian.pip_venv
 - src: baztian.dev_tools
 - src: baztian.java
