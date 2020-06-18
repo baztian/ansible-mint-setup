@@ -12,4 +12,5 @@
 - src: baztian.emacs
 - src: baztian.jetbrains_toolbox
 - src: baztian.js
+- src: baztian.jython
 - src: baztian.other_installs
