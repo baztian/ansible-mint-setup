@@ -130,8 +130,11 @@
 - name: Set default aws profile for saml2aws
   lineinfile:
     path: ~/.bashrc
-    regexp: '^export AWS_DEFAULT_PROFILE='
-    line: export AWS_DEFAULT_PROFILE=saml
+    regexp: '^export {{ item }}='
+    line: export {{ item }}=saml
+  with_items:
+    - AWS_DEFAULT_PROFILE
+    - AWS_PROFILE
   become: no
   tags: saml2aws
 - name: Check if terraform {{ terraform_version }} already installed
