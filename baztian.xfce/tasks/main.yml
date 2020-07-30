@@ -37,7 +37,7 @@
       property: /Default/Numlock
       value_type: bool
       value: "true"
-  - name: Remove unused keyboard shortcuts
+  - name: Remove unused window manager keyboard shortcuts
     xfconf:
       channel: xfce4-keyboard-shortcuts
       value: dummy
@@ -45,7 +45,25 @@
       property: "/xfwm4/custom/{{ item }}"
       state: absent
     with_items:
-      "{{ xfce_shortcuts_remove }}"
+      "{{ xfce_wm_shortcuts_remove }}"
+  - name: Remove unused application keyboard shortcuts
+    xfconf:
+      channel: xfce4-keyboard-shortcuts
+      value: dummy
+      value_type: string
+      property: "/commands/custom/{{ item }}"
+      state: absent
+    with_items:
+      "{{ xfce_app_shortcuts_remove }}"
+  - name: Add new application keyboard shortcuts
+    xfconf:
+      channel: xfce4-keyboard-shortcuts
+      value: "{{ item.cmd }}"
+      value_type: string
+      property: "/commands/custom/{{ item.key }}"
+      state: present
+    with_items:
+      "{{ xfce_app_shortcuts_add }}"
   - name: Ensure Xfce terminal configuration folder exists
     file:
       path: ~/.config/xfce4/terminal

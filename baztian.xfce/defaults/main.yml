@@ -1,5 +1,5 @@
 ---
-xfce_shortcuts_remove:
+xfce_wm_shortcuts_remove:
 - <Alt>space # Window operations menu
 - <Super>Tab # Switch window for same avi_application
 - <Alt>F10 # Maximize window
@@ -61,6 +61,17 @@ xfce_shortcuts_remove:
 - <Primary>F12 # Workspace 12
 - <Alt>Insert # Add workspace
 - <Alt>Delete # Delete last workspace
+xfce_app_shortcuts_remove:
+- <Alt>F3 # appfinder
+- <Alt>F3 # appfinder collapsed
+- <Alt>F1 # application menu
+- <Primary>Escape # xfdesktop menu
+- <Primary><Alt>Delete # xflock
+- <Primary><Alt>l # xflock
+xfce_app_shortcuts_add:
+  - xflock:
+    key: <Primary><Super>q
+    cmd: xflock4
 xfce_terminal:
   terminalrc_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/terminalrc
   accels_scm_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/accels.scm
