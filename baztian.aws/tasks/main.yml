@@ -1,10 +1,10 @@
 ---
-- name: Install awscli
+- name: Install awscli {{ awscli_version }}
   include_role:
     name: baztian.pip_venv
   vars:
       pkg: awscli
-      version: 1.16.272
+      version: "{{ awscli_version }}"
       bin: aws
 - name: Setup awscli bash completion
   copy:
@@ -18,6 +18,8 @@
 - name: Install session-manager-plugin {{ awscli_session_manager_plugin_version }}
   apt:
     deb: /tmp/session-manager-plugin.deb
+    # allow for downgrade to avoid possible conflicts in GitHub Actions
+    force: yes
 - name: Check if aws-vault {{ aws_vault_version }} already installed
   stat:
     path: /opt/aws-vault-{{ aws_vault_version }}/aws-vault
@@ -78,11 +80,11 @@
     dest: "/usr/local/bin/aws-vault"
     state: link
   tags: aws_vault
-- name: Set assume role TTL for aws-vault to 1 hour
+- name: Set assume role TTL for aws-vault to {{ aws_vault_assume_role_ttl }}
   lineinfile:
     path: ~/.bashrc
     regexp: '^export AWS_ASSUME_ROLE_TTL='
-    line: export AWS_ASSUME_ROLE_TTL=1h
+    line: export AWS_ASSUME_ROLE_TTL={{ aws_vault_assume_role_ttl }}
   become: no
   tags: aws_vault
 - name: Check if saml2aws {{ saml2aws_version }} already installed
