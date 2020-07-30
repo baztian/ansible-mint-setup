@@ -1,10 +1,10 @@
 ---
-- name: Install awscli
+- name: Install awscli {{ awscli_version }}
   include_role:
     name: baztian.pip_venv
   vars:
       pkg: awscli
-      version: 1.16.272
+      version: "{{ awscli_version }}"
       bin: aws
 - name: Setup awscli bash completion
   copy:
@@ -80,11 +80,11 @@
     dest: "/usr/local/bin/aws-vault"
     state: link
   tags: aws_vault
-- name: Set assume role TTL for aws-vault to 1 hour
+- name: Set assume role TTL for aws-vault to {{ aws_vault_assume_role_ttl }}
   lineinfile:
     path: ~/.bashrc
     regexp: '^export AWS_ASSUME_ROLE_TTL='
-    line: export AWS_ASSUME_ROLE_TTL=1h
+    line: export AWS_ASSUME_ROLE_TTL={{ aws_vault_assume_role_ttl }}
   become: no
   tags: aws_vault
 - name: Check if saml2aws {{ saml2aws_version }} already installed
