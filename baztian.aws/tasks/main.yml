@@ -18,6 +18,8 @@
 - name: Install session-manager-plugin {{ awscli_session_manager_plugin_version }}
   apt:
     deb: /tmp/session-manager-plugin.deb
+    # allow for downgrade to avoid possible conflicts in GitHub Actions
+    force: yes
 - name: Check if aws-vault {{ aws_vault_version }} already installed
   stat:
     path: /opt/aws-vault-{{ aws_vault_version }}/aws-vault
