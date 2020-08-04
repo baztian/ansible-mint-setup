@@ -176,6 +176,12 @@
     dest: /usr/local/bin/terraform
     state: link
   tags: terraform,no_github
+- name: Symlink terraform binary as terraform12
+  file:
+    src: /opt/terraform-{{ terraform_version }}/terraform
+    dest: /usr/local/bin/terraform12
+    state: link
+  tags: terraform,no_github
 - name: Determine whether python 3.6 for aws-sam-cli required specifically
   set_fact:
     py_version: "{{ '3.6' if ( ansible_distribution == 'Debian' and ansible_distribution_release == 'stretch'
