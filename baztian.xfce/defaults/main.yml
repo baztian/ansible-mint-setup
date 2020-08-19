@@ -35,6 +35,10 @@ xfce_wm_shortcuts_remove:
 - <Alt><Control>KP_9 # Move window to workspace 9
 - <Primary><Alt>d # Show desktop
 - <Control><Alt>d # Show desktop
+- <Primary><Alt>Up # Upper workspace
+- <Primary><Alt>Down # Bottom workspace
+- <Primary><Alt>Left # Left workspace
+- <Primary><Alt>Right # Right workspace
 - <Control>F1 # Workspace 1
 - <Control>F2 # Workspace 2
 - <Control>F3 # Workspace 3
@@ -61,17 +65,39 @@ xfce_wm_shortcuts_remove:
 - <Primary>F12 # Workspace 12
 - <Alt>Insert # Add workspace
 - <Alt>Delete # Delete last workspace
+xfce_wm_shortcuts_add:
+- upperWorkspace:
+  key: <Primary><Super>Up
+  cmd: up_workspace_key
+- lowerWorkspace:
+  key: <Primary><Super>Down
+  cmd: down_workspace_key
+- leftWorkspace:
+  key: <Primary><Super>Left
+  cmd: left_workspace_key
+- rightWorkspace:
+  key: <Primary><Super>Right
+  cmd: right_workspace_key
 xfce_app_shortcuts_remove:
 - <Alt>F3 # appfinder
-- <Alt>F3 # appfinder collapsed
+- <Alt>F2 # appfinder collapsed
 - <Alt>F1 # application menu
 - <Primary>Escape # xfdesktop menu
 - <Primary><Alt>Delete # xflock
 - <Primary><Alt>l # xflock
 xfce_app_shortcuts_add:
-  - xflock:
-    key: <Primary><Super>q
-    cmd: xflock4
+- xflock:
+  key: <Primary><Super>q
+  cmd: xflock4
+- appfinder:
+  key: <Super>space
+  cmd: xfce4-appfinder --collapsed
+- terminal:
+  key: <Primary><Alt>t
+  cmd: x-terminal-emulator
+- thunar:
+  key: <Primary><Alt>e
+  cmd: thunar
 xfce_terminal:
   terminalrc_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/terminalrc
   accels_scm_url: https://gist.githubusercontent.com/baztian/a79baeded0cfde90060c7147d31e627c/raw/accels.scm

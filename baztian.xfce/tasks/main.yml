@@ -46,6 +46,15 @@
       state: absent
     with_items:
       "{{ xfce_wm_shortcuts_remove }}"
+  - name: Add new window manager keyboard shortcuts
+    xfconf:
+      channel: xfce4-keyboard-shortcuts
+      value: "{{ item.cmd }}"
+      value_type: string
+      property: "/xfwm4/custom/{{ item.key }}"
+      state: present
+    with_items:
+      "{{ xfce_wm_shortcuts_add }}"
   - name: Remove unused application keyboard shortcuts
     xfconf:
       channel: xfce4-keyboard-shortcuts
