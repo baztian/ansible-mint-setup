@@ -7,9 +7,11 @@
       version: "{{ awscli_version }}"
       bin: aws
 - name: Setup awscli bash completion
-  copy:
-    content: 'complete -C "/opt/awscli/bin/aws_completer" aws'
-    dest: "/etc/bash_completion.d/aws_completer"
+  lineinfile:
+    create: yes
+    path: /etc/bash_completion.d/aws_completer
+    regexp: '^complete -C "/opt/awscli/bin/aws_completer" aws$'
+    line: complete -C "/opt/awscli/bin/aws_completer" aws
 - name: Download session-manager-plugin {{ awscli_session_manager_plugin_version }}
   get_url:
     url: https://s3.amazonaws.com/session-manager-downloads/plugin/{{ awscli_session_manager_plugin_version }}/ubuntu_64bit/session-manager-plugin.deb
@@ -87,6 +89,11 @@
     line: export AWS_ASSUME_ROLE_TTL={{ aws_vault_assume_role_ttl }}
   become: no
   tags: aws_vault
+- name: Setup awscli bash completion for aws-vault
+  lineinfile:
+    path: /etc/bash_completion.d/aws_completer
+    regexp: '^complete -C "/opt/awscli/bin/aws_completer" aws-vault$'
+    line: complete -C "/opt/awscli/bin/aws_completer" aws-vault
 - name: Check if saml2aws {{ saml2aws_version }} already installed
   stat:
     path: /opt/saml2aws-{{ saml2aws_version }}/saml2aws
