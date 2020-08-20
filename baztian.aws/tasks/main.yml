@@ -52,36 +52,6 @@
     dest: "/usr/local/bin/aws-vault"
     state: link
   tags: aws_vault
-- name: Check if aws-vault {{ aws_vault_version }} already installed
-  stat:
-    path: /opt/aws-vault-{{ aws_vault_version }}/aws-vault
-  register: aws_vault_directory
-  tags: aws_vault
-- name: Create aws-vault {{ aws_vault_version }} directory
-  file:
-    path: /opt/aws-vault-{{ aws_vault_version }}
-    state: directory
-  tags: aws_vault
-- name: Download aws_vault {{ aws_vault_version }}
-  get_url:
-    url: https://github.com/99designs/aws-vault/releases/download/v{{ aws_vault_version }}/aws-vault-linux-amd64
-    checksum: sha256:{{ aws_vault_sha256 }}
-    dest: /opt/aws-vault-{{ aws_vault_version }}/aws-vault
-    mode: "755"
-  when: not aws_vault_directory.stat.exists
-  tags: aws_vault
-- name: Symlink default aws-vault version to aws-vault {{ aws_vault_version }}
-  file:
-    src: aws-vault-{{ aws_vault_version }}
-    dest: /opt/aws-vault
-    state: link
-  tags: aws_vault
-- name: Symlink aws-vault binary
-  file:
-    src: "/opt/aws-vault/aws-vault"
-    dest: "/usr/local/bin/aws-vault"
-    state: link
-  tags: aws_vault
 - name: Set assume role TTL for aws-vault to {{ aws_vault_assume_role_ttl }}
   lineinfile:
     path: ~/.bashrc
