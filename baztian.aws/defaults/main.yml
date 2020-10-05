@@ -1,5 +1,5 @@
 ---
-awscli_version: 1.18.108
+awscli_version: 1.18.128
 # https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html#plugin-version-history
 awscli_session_manager_plugin_version: 1.1.61.0
 awscli_session_manager_plugin_sha256: d4d578a64210165ec434d658212304a968acb2efa49074868552427e738ea97c
