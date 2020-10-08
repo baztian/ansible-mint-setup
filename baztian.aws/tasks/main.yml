@@ -22,6 +22,12 @@
     deb: /tmp/session-manager-plugin.deb
     # allow for downgrade to avoid possible conflicts in GitHub Actions
     force: yes
+- name: Add dockstats alias
+  lineinfile:
+    path: ~/.bashrc
+    regexp: '^alias whereami='
+    line: "{% raw %}alias whereami='echo -n $(aws iam list-account-aliases --query \"AccountAliases\" --output text) \"=> \" && aws sts get-caller-identity --query \"Account\" --output text'{% endraw %}" # noqa 204
+  become: no
 - name: Check if aws-vault {{ aws_vault_version }} already installed
   stat:
     path: /opt/aws-vault-{{ aws_vault_version }}/aws-vault
