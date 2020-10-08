@@ -10,4 +10,4 @@ saml2aws_version: 2.26.1
 saml2aws_sha512: 15f1ad5dda74865639a64790630ac604cbce446c2d331b5ae8f65a0435101f1eab24ad96e736aae5c9e074ad3252947f80dba267ec792649c2c1cfab5326d2fc
 terraform_version: 0.12.29
 terraform_sha256: 872245d9c6302b24dc0d98a1e010aef1e4ef60865a2d1f60102c8ad03e9d5a1d
-aws_sam_cli_version: 1.0.0
+aws_sam_cli_version: 1.4.0
