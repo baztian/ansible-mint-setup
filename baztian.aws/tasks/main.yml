@@ -1,17 +1,45 @@
 ---
-- name: Install awscli {{ awscli_version }}
-  include_role:
-    name: baztian.pip_venv
-  vars:
-      pkg: awscli
-      version: "{{ awscli_version }}"
-      bin: aws
+- name: Check if awscli {{ awscli_version }} already installed
+  stat:
+    path: /opt/awscli-{{ awscli_version }}/awscli
+  register: awscli_directory
+  tags: awscli
+- name: Download awscli {{ awscli_version }}
+  get_url:
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64-{{ awscli_version }}.zip
+    checksum: "sha256:{{ awscli_sha256 }}"
+    dest: /tmp/awscli-{{ awscli_version }}.zip
+  tags: awscli
+- name: Create awscli {{ awscli_version }} directory
+  file:
+    path: /opt/awscli-{{ awscli_version }}
+    state: directory
+  tags: awscli
+- name: Unarchive awscli {{ awscli_version }}
+  unarchive:
+    src: /tmp/awscli-{{ awscli_version }}.zip
+    dest: /opt/awscli-{{ awscli_version }}
+    remote_src: yes
+  when: not awscli_directory.stat.exists
+  tags: awscli
+- name: Symlink default awscli version to awscli {{ awscli_version }}
+  file:
+    src: awscli-{{ awscli_version }}
+    dest: /opt/awscli
+    state: link
+  tags: awscli
+- name: Symlink awscli binary
+  file:
+    src: /opt/awscli/aws/dist/aws
+    dest: /usr/local/bin/aws
+    state: link
+  tags: awscli
 - name: Setup awscli bash completion
   lineinfile:
     create: yes
     path: /etc/bash_completion.d/aws_completer
-    regexp: '^complete -C "/opt/awscli/bin/aws_completer" aws$'
-    line: complete -C "/opt/awscli/bin/aws_completer" aws
+    regexp: '^complete -C "/opt/awscli/.*/aws_completer" aws$'
+    line: complete -C "/opt/awscli/aws/dist/aws_completer" aws
 - name: Download session-manager-plugin {{ awscli_session_manager_plugin_version }}
   get_url:
     url: https://s3.amazonaws.com/session-manager-downloads/plugin/{{ awscli_session_manager_plugin_version }}/ubuntu_64bit/session-manager-plugin.deb
@@ -68,8 +96,8 @@
 - name: Setup awscli bash completion for aws-vault
   lineinfile:
     path: /etc/bash_completion.d/aws_completer
-    regexp: '^complete -C "/opt/awscli/bin/aws_completer" aws-vault$'
-    line: complete -C "/opt/awscli/bin/aws_completer" aws-vault
+    regexp: '^complete -C "/opt/awscli/aws/dist/aws_completer" aws-vault$'
+    line: complete -C "/opt/awscli/aws/dist/aws_completer" aws-vault
 - name: Check if saml2aws {{ saml2aws_version }} already installed
   stat:
     path: /opt/saml2aws-{{ saml2aws_version }}/saml2aws

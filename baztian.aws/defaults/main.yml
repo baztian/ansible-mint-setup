@@ -1,5 +1,8 @@
 ---
-awscli_version: 1.18.128
+# https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-install
+# https://github.com/aws/aws-cli/blob/v2/CHANGELOG.rst
+awscli_version: 2.0.56
+awscli_sha256: 3918c3e83cde54e101e99ff61dfac70f9dda59ef452cb58a01e0bc1142b95175.
 # https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html#plugin-version-history
 awscli_session_manager_plugin_version: 1.1.61.0
 awscli_session_manager_plugin_sha256: d4d578a64210165ec434d658212304a968acb2efa49074868552427e738ea97c
