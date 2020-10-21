@@ -142,7 +142,7 @@
   tags: saml2aws
 - name: Set default aws profile for saml2aws
   lineinfile:
-    path: ~/.bashrc
+    path: ~/.profile
     regexp: '^export {{ item }}='
     line: export {{ item }}=saml
   with_items:
