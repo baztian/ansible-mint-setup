@@ -9,6 +9,7 @@
     url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64-{{ awscli_version }}.zip
     checksum: "sha256:{{ awscli_sha256 }}"
     dest: /tmp/awscli-{{ awscli_version }}.zip
+  when: not awscli_directory.stat.exists
   tags: awscli
 - name: Create awscli {{ awscli_version }} directory
   file:
