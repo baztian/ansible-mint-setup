@@ -21,17 +21,21 @@ Setup ansible on the *host* (not VM guest).
 
 ## Usage
 
-Install required roles first.
+Install on local machine using `ansible-pull`.
 
-    ansible-galaxy install -r requirements.yml
+    ansible-pull -U https://github.com/baztian/ansible-mint-setup.git -i local playbook.yml -K
 
-Install on local machine.
+Install on local machine using stock `ansible`.
 
     ansible-playbook playbook.yml -i local -K
 
 Install but skip some steps.
 
     ansible-playbook playbook.yml -i local -K --skip-tags xfce,calibre,eac,spotify
+
+Force upgrade required roles.
+
+    ansible-galaxy install -f -r requirements.yml
 
 ## Manual steps while running the Linux Mint installer
 

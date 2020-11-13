@@ -1,44 +1,68 @@
 ---
 - hosts: all
   become: yes
-  roles:
-    - role: baztian.apt_upgrade
+  tasks:
+    - name: Download required roles
+      local_action: command ansible-galaxy install -r {{ playbook_dir }}/requirements.yml
+      become: false
+      tags: always
+    - block:
+      - include_role: name=baztian.apt_upgrade
       tags: apt_upgrade
-    - role: baztian.xfce
+    - block:
+      - include_role: name=baztian.xfce
       tags: xfce
-    - role: baztian.git
+    - block:
+      - include_role: name=baztian.git
       tags: git
-    - role: baztian.python
+    - block:
+      - include_role: name=baztian.python
       tags: python
-    - role: baztian.emacs
+    - block:
+      - include_role: name=baztian.emacs
       tags: emacs
-    - role: baztian.keepass
+    - block:
+      - include_role: name=baztian.keepass
       tags: keepass
-    - role: baztian.gocryptfs
+    - block:
+      - include_role: name=baztian.gocryptfs
       tags: gocryptfs
-    - role: baztian.docker
+    - block:
+      - include_role: name=baztian.docker
       tags: docker
-    - role: baztian.java
+    - block:
+      - include_role: name=baztian.java
       tags: java
-    - role: baztian.jython
+    - block:
+      - include_role: name=baztian.jython
       tags: jython
-    - role: baztian.vscode
+    - block:
+      - include_role: name=baztian.vscode
       tags: vscode
-    - role: baztian.jetbrains_toolbox
+    - block:
+      - include_role: name=baztian.jetbrains_toolbox
       tags: jetbrains_toolbox
-    - role: baztian.js
+    - block:
+      - include_role: name=baztian.js
       tags: js
-    - role: baztian.dev_tools
+    - block:
+      - include_role: name=baztian.dev_tools
       tags: dev_tools
-    - role: baztian.aws
+    - block:
+      - include_role: name=baztian.aws
       tags: aws
-    - role: baztian.other_apt_installs
+    - block:
+      - include_role: name=baztian.other_apt_installs
       tags: other_apt_installs
-    - role: baztian.calibre
+    - block:
+      - include_role: name=baztian.calibre
       tags: calibre
-    - role: baztian.vagrant
+    - block:
+      - include_role: name=baztian.vagrant
       tags: vagrant
-    - role: baztian.eac
+    - block:
+      - include_role: name=baztian.eac
       tags: eac
-    - role: baztian.joplin
+    - block:
+      - include_role: name=baztian.joplin
       tags: joplin
