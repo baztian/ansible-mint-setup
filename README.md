@@ -23,7 +23,7 @@ Setup ansible on the *host* (not VM guest).
 
 Install on local machine using `ansible-pull`.
 
-    ansible-pull -u https://github.com/baztian/ansible-mint-setup.git -i local playbook.yml -K
+    ansible-pull -U https://github.com/baztian/ansible-mint-setup.git -i local playbook.yml -K
 
 Install on local machine using stock `ansible`.
 
