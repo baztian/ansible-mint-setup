@@ -33,6 +33,10 @@ Install but skip some steps.
 
     ansible-playbook playbook.yml -i local -K --skip-tags xfce,calibre,eac,spotify
 
+Force upgrade required roles.
+
+    ansible-galaxy install -f -r requirements.yml
+
 ## Manual steps while running the Linux Mint installer
 
 1. Start _Install Linux Mint_
