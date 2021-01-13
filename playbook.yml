@@ -19,6 +19,9 @@
       - include_role: name=baztian.python
       tags: python
     - block:
+      - include_role: name=baztian.asdf
+      tags: asdf
+    - block:
       - include_role: name=baztian.emacs
       tags: emacs
     - block:
