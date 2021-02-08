@@ -55,8 +55,8 @@
       - include_role: name=baztian.aws
       tags: aws
     - block:
-      - include_role: name=baztian.other_apt_installs
-      tags: other_apt_installs
+      - include_role: name=baztian.other_installs
+      tags: other_installs
     - block:
       - include_role: name=baztian.calibre
       tags: calibre
