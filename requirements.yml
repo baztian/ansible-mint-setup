@@ -3,6 +3,7 @@
 - src: baztian.pip_venv
 - src: baztian.dev_tools
 - src: baztian.java
+- src: baztian.aws
 - src: baztian.keepass
 - src: baztian.calibre
 - src: baztian.joplin
