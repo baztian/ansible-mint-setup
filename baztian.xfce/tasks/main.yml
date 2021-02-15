@@ -1,4 +1,6 @@
 ---
+- name: Update apt cache.
+  apt: update_cache=yes cache_valid_time=3600
 - name: Install required packages
 # This should usually be in place if using an xfce distro
   apt:
