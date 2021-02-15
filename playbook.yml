@@ -9,13 +9,13 @@
       changed_when: False
       tags: always
     - block:
-      - include_role: name=baztian.apt_upgrade
+      - include_role: name=apt_upgrade
       tags: apt_upgrade
     - block:
-      - include_role: name=baztian.xfce
+      - include_role: name=xfce
       tags: xfce
     - block:
-      - include_role: name=baztian.git
+      - include_role: name=git
       tags: git
     - block:
       - include_role: name=baztian.python
@@ -33,7 +33,7 @@
       - include_role: name=baztian.gocryptfs
       tags: gocryptfs
     - block:
-      - include_role: name=baztian.docker
+      - include_role: name=docker
       tags: docker
     - block:
       - include_role: name=baztian.java
@@ -63,10 +63,10 @@
       - include_role: name=baztian.calibre
       tags: calibre
     - block:
-      - include_role: name=baztian.vagrant
+      - include_role: name=vagrant
       tags: vagrant
     - block:
-      - include_role: name=baztian.eac
+      - include_role: name=eac
       tags: eac
     - block:
       - include_role: name=baztian.joplin
