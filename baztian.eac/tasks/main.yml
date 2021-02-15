@@ -21,6 +21,7 @@
   file:
     path: /usr/local/share/applications
     state: directory
+    mode: 0755
 - name: Install icons
   unarchive:
     src: /tmp/eac-icons.tar
@@ -29,18 +30,21 @@
   file:
     path: ~/.config/exact-audio-copy
     state: directory
+    mode: 0755
   become: no
 - name: Create default user config
   template:
     src: config.j2
     dest: ~/.config/exact-audio-copy/config
+    mode: 0644
   become: no
 - name: Add wrapper script for Exact Audio Copy
   copy:
     src: exact-audio-copy
     dest: /usr/local/bin/
-    mode: "755"
+    mode: 0755
 - name: Add launcher for Exact Audio Copy
   copy:
     src: eac.desktop
     dest: /usr/local/share/applications/
+    mode: 0644
