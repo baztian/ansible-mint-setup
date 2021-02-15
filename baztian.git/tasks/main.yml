@@ -64,5 +64,5 @@
   get_url:
     url: '{{ get_repos_url }}'
     dest: /usr/local/bin/get_repos.sh
-    mode: "755"
+    mode: 0755
     force: yes

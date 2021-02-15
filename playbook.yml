@@ -4,7 +4,8 @@
   tasks:
     - name: Download required roles
       local_action: command ansible-galaxy install -r {{ playbook_dir }}/requirements.yml
-      become: false
+      become: no
+      changed_when: False
       tags: always
     - block:
       - include_role: name=baztian.apt_upgrade
