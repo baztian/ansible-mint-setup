@@ -48,6 +48,7 @@
   file:
     src: "/opt/hub/bin/hub"
     dest: "/usr/local/bin/hub"
+    force: yes
     state: link
 - name: Add hub git alias and setup bash completion
   blockinfile:
