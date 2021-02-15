@@ -3,7 +3,8 @@
   become: yes
   tasks:
     - name: Download required roles
-      local_action: command ansible-galaxy install -r {{ playbook_dir }}/requirements.yml
+      delegate_to: localhost
+      command: ansible-galaxy install -r {{ playbook_dir }}/requirements.yml
       become: no
       changed_when: False
       tags: always

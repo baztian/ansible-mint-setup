@@ -1,1 +1,1 @@
-delegate_to: localhost
+localhost ansible_connection=local
