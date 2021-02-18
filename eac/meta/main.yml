@@ -13,5 +13,3 @@ galaxy_info:
     - exactaudiocopy
     - rip
     - cd
-dependencies:
-    - baztian.docker
