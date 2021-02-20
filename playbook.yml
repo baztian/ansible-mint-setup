@@ -15,7 +15,7 @@
       - include_role: name=xfce
       tags: xfce
     - block:
-      - include_role: name=git
+      - include_role: name=baztian.git
       tags: git
     - block:
       - include_role: name=baztian.python
