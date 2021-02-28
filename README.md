@@ -98,11 +98,13 @@ Setup SSH server on the VM.
 Setup SSH authorized keys and configure `vbox` alias.
 
 ```
-ssh-copy-id -p 3222 -i ~/.ssh/id_rsa localhost
+ssh-copy-id -p 3222 -o IdentitiesOnly=yes -i ~/.ssh/id_rsa localhost
 cat >> ~/.ssh/config <<HERE
 Host vbox
   HostName localhost
   Port 3222
+  IdentityFile ~/.ssh/id_rsa.pub
+  IdentitiesOnly yes
 HERE
 ```
 
