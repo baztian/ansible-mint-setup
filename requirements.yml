@@ -1,3 +1,4 @@
+- src: baztian.apt_upgrade
 - src: baztian.git
 - src: baztian.asdf
 - src: baztian.vscode
