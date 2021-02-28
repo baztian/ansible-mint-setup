@@ -60,6 +60,9 @@
       - include_role: name=baztian.other_installs
       tags: other_installs
     - block:
+      - include_role: name=baztian.skype
+      tags: skype
+    - block:
       - include_role: name=baztian.calibre
       tags: calibre
     - block:
