@@ -12,7 +12,7 @@
       - include_role: name=apt_upgrade
       tags: apt_upgrade
     - block:
-      - include_role: name=xfce
+      - include_role: name=baztian.xfce
       tags: xfce
     - block:
       - include_role: name=baztian.git
