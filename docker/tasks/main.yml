@@ -16,7 +16,7 @@
     url: https://download.docker.com/linux/ubuntu/gpg
     id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
 - name: Extract distribution base name (works on linux mint as well)
-  command: grep -oP 'UBUNTU_CODENAME=\K.*' /etc/os-release
+  command: grep -oP '{{ "UBUNTU" if ansible_distribution == "Ubuntu" else "VERSION" }}_CODENAME=\K.*' /etc/os-release
   register: distro
   changed_when: False
 - name: Add Docker apt repository
