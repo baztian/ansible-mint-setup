@@ -4,6 +4,7 @@
 - src: baztian.vscode
 - src: baztian.python
 - src: baztian.pip_venv
+- src: baztian.adr_tools
 - src: baztian.dev_tools
 - src: baztian.java
 - src: baztian.aws
