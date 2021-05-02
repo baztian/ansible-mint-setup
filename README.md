@@ -31,7 +31,7 @@ Install on local machine using stock `ansible`.
 
 Install but skip some steps.
 
-    ansible-playbook playbook.yml -i local -K --skip-tags xfce,calibre,eac,spotify
+    ansible-playbook playbook.yml -i local -K --skip-tags xfce,calibre,eac,spotify,multimedia
 
 Force upgrade required roles.
 

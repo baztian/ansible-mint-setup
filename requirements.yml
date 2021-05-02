@@ -17,5 +17,6 @@
 - src: baztian.js
 - src: baztian.jython
 - src: baztian.other_installs
+- src: baztian.multimedia
 - src: baztian.skype
 - src: baztian.xfce
