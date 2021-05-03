@@ -63,6 +63,9 @@
       - include_role: name=baztian.multimedia
       tags: multimedia
     - block:
+      - include_role: name=baztian.squeezeplay
+      tags: squeezeplay
+    - block:
       - include_role: name=baztian.skype
       tags: skype
     - block:
