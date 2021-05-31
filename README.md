@@ -144,3 +144,33 @@ To monitor all available channels use this one liner.
 You can cancel monitoring by issuing
 
     killall xfconf-query
+
+## Role dependencies
+
+This playbook depends on several roles.
+
+|Role|Build-status|Galaxy Link|
+| -- | ---------- | --------- |
+| baztian.apt_upgrade | ![CI](https://github.com/baztian/ansible-apt-upgrade/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/apt_upgrade) |
+| baztian.git | ![CI](https://github.com/baztian/ansible-git/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/git) |
+| baztian.asdf | ![CI](https://github.com/baztian/ansible-asdf/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/asdf) |
+| baztian.vscode | ![CI](https://github.com/baztian/ansible-vscode/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/vscode) |
+| baztian.python | ![CI](https://github.com/baztian/ansible-python/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/python) |
+| baztian.pip_venv | ![CI](https://github.com/baztian/ansible-pip-venv/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/pip_venv) |
+| baztian.adr_tools | ![CI](https://github.com/baztian/ansible-adr-tools/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/adr_tools) |
+| baztian.dev_tools | ![CI](https://github.com/baztian/ansible-dev-tools/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/dev_tools) |
+| baztian.java | ![CI](https://github.com/baztian/ansible-java/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/java) |
+| baztian.aws | ![CI](https://github.com/baztian/ansible-aws/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/aws) |
+| baztian.keepass | ![CI](https://github.com/baztian/ansible-keepass/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/keepass) |
+| baztian.calibre | ![CI](https://github.com/baztian/ansible-calibre/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/calibre) |
+| baztian.joplin | ![CI](https://github.com/baztian/ansible-joplin/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/joplin) |
+| baztian.gocryptfs | ![CI](https://github.com/baztian/ansible-gocryptfs/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/gocryptfs) |
+| baztian.emacs | ![CI](https://github.com/baztian/ansible-emacs/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/emacs) |
+| baztian.jetbrains_toolbox | ![CI](https://github.com/baztian/ansible-jetbrains-toolbox/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/jetbrains_toolbox) |
+| baztian.js | ![CI](https://github.com/baztian/ansible-js/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/js) |
+| baztian.jython | ![CI](https://github.com/baztian/ansible-jython/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/jython) |
+| baztian.other_installs | ![CI](https://github.com/baztian/ansible-other-installs/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/other_installs) |
+| baztian.multimedia | ![CI](https://github.com/baztian/ansible-multimedia/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/multimedia) |
+| baztian.squeezeplay | ![CI](https://github.com/baztian/ansible-squeezeplay/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/squeezeplay) |
+| baztian.skype | ![CI](https://github.com/baztian/ansible-skype/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/skype) |
+| baztian.xfce | ![CI](https://github.com/baztian/ansible-xfce/workflows/CI/badge.svg) | [Galaxy](https://galaxy.ansible.com/baztian/xfce) |
