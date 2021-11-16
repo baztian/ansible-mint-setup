@@ -50,7 +50,7 @@
     url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
     checksum: "sha1:{{ docker_compose_sha1 }}"
     dest: /usr/local/bin/docker-compose
-    mode: u+x
+    mode: 755
 - name: Enable Docker Compose autocompletion
   get_url:
     url: https://raw.githubusercontent.com/docker/compose/{{ docker_compose_version }}/contrib/completion/bash/docker-compose
