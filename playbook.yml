@@ -33,7 +33,7 @@
       - include_role: name=baztian.gocryptfs
       tags: gocryptfs
     - block:
-      - include_role: name=docker
+      - include_role: name=baztian.docker
       tags: docker
     - block:
       - include_role: name=baztian.java
