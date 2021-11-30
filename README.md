@@ -154,6 +154,7 @@ This playbook depends on several roles.
 | [baztian.apt_upgrade](https://galaxy.ansible.com/baztian/apt_upgrade) | [![CI](https://github.com/baztian/ansible-apt-upgrade/workflows/CI/badge.svg)](https://github.com/baztian/ansible-apt-upgrade) |
 | [baztian.git](https://galaxy.ansible.com/baztian/git) | [![CI](https://github.com/baztian/ansible-git/workflows/CI/badge.svg)](https://github.com/baztian/ansible-git) |
 | [baztian.asdf](https://galaxy.ansible.com/baztian/asdf) | [![CI](https://github.com/baztian/ansible-asdf/workflows/CI/badge.svg)](https://github.com/baztian/ansible-asdf) |
+| [baztian.docker](https://galaxy.ansible.com/baztian/docker) | [![CI](https://github.com/baztian/ansible-docker/workflows/CI/badge.svg)](https://github.com/baztian/ansible-docker) |
 | [baztian.vscode](https://galaxy.ansible.com/baztian/vscode) | [![CI](https://github.com/baztian/ansible-vscode/workflows/CI/badge.svg)](https://github.com/baztian/ansible-vscode) |
 | [baztian.python](https://galaxy.ansible.com/baztian/python) | [![CI](https://github.com/baztian/ansible-python/workflows/CI/badge.svg)](https://github.com/baztian/ansible-python) |
 | [baztian.pip_venv](https://galaxy.ansible.com/baztian/pip_venv) | [![CI](https://github.com/baztian/ansible-pip-venv/workflows/CI/badge.svg)](https://github.com/baztian/ansible-pip-venv) |

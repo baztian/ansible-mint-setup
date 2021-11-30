@@ -1,6 +1,7 @@
 - src: baztian.apt_upgrade
 - src: baztian.git
 - src: baztian.asdf
+- src: baztian.docker
 - src: baztian.vscode
 - src: baztian.python
 - src: baztian.pip_venv
