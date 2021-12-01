@@ -75,7 +75,7 @@
       - include_role: name=baztian.calibre
       tags: calibre
     - block:
-      - include_role: name=vagrant
+      - include_role: name=baztian.vagrant
       tags: vagrant
     - block:
       - include_role: name=eac
