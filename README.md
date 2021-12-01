@@ -175,3 +175,4 @@ This playbook depends on several roles.
 | [baztian.squeezeplay](https://galaxy.ansible.com/baztian/squeezeplay) | [![CI](https://github.com/baztian/ansible-squeezeplay/workflows/CI/badge.svg)](https://github.com/baztian/ansible-squeezeplay) |
 | [baztian.skype](https://galaxy.ansible.com/baztian/skype) | [![CI](https://github.com/baztian/ansible-skype/workflows/CI/badge.svg)](https://github.com/baztian/ansible-skype) |
 | [baztian.xfce](https://galaxy.ansible.com/baztian/xfce) | [![CI](https://github.com/baztian/ansible-xfce/workflows/CI/badge.svg)](https://github.com/baztian/ansible-xfce) |
+| [baztian.signal](https://galaxy.ansible.com/baztian/signal) | [![CI](https://github.com/baztian/ansible-signal/workflows/CI/badge.svg)](https://github.com/baztian/ansible-signal) |
