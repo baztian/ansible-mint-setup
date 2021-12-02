@@ -78,7 +78,7 @@
       - include_role: name=baztian.vagrant
       tags: vagrant
     - block:
-      - include_role: name=eac
+      - include_role: name=baztian.eac
       tags: eac
     - block:
       - include_role: name=baztian.joplin

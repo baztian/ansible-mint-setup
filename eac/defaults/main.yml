@@ -1,4 +1,0 @@
----
-eac_image: baztian/wine-eac
-eac_data_dir: '${HOME}/Music'
-eac_force_pull_image: yes
